@@ -25,7 +25,7 @@ export class Rutinas {
       error: (err) => {
         this.error.set('Error al cargar las rutinas');
         this.cargando.set(false);
-        console.error("Ha ocurrido un error: "  , err  );
+        console.error("Ha ocurrido un error: " , err);
       }
     });
   }

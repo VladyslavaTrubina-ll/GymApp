@@ -1,3 +1,4 @@
+
 {
   "workouts": [
     {
@@ -107,14 +108,14 @@
           "id": 301,
           "nombre": "Gato-Camello",
           "descripcion": "Movilidad de la columna vertebral en posición de cuadrupedia.",
-          "foto": "assets/imagen/imagen12.jpg",
+          "foto": "assets/imagen/imagen2.jpg",
           "series": [
             {
               "nombre": "Serie 1",
               "repeticiones": 10,
               "duracion": 60,
               "descanso": 10,
-              "foto": "assets/imagen/imagen13.jpg"
+              "foto": "assets/imagen/imagen3.jpg"
             }
           ]
         }
@@ -130,21 +131,21 @@
           "id": 401,
           "nombre": "Flexiones con palmada",
           "descripcion": "Push-ups explosivas despegando las manos del suelo.",
-          "foto": "assets/imagen/imagen14.jpg",
+          "foto": "assets/imagen/imagen10.jpg",
           "series": [
             {
               "nombre": "Serie 1",
               "repeticiones": 10,
               "duracion": 30,
               "descanso": 30,
-              "foto": "assets/imagen/imagen15.jpg"
+              "foto": "assets/imagen/imagen6.jpg"
             },
             {
               "nombre": "Serie 2",
               "repeticiones": 10,
               "duracion": 30,
               "descanso": 30,
-              "foto": "assets/images/imagen16.jpg"
+              "foto": "assets/images/imagen7.jpg"
             }
           ]
         }
