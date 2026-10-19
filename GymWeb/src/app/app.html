@@ -1,65 +1,47 @@
-<main class="container my-4">
-  <h1 class="mb-4 text-center">Rutinas de Entrenamiento</h1>
+<main>
+  <h1>Rutinas de Entrenamiento</h1>
 
   @if (cargando()) {
-    <div class="alert alert-info text-center">
-      Cargando rutinas
-    </div>
+    <p>Cargando rutinas...</p>
   }
 
   @if (error()) {
-    <div class="alert alert-danger text-center">
-      {{ error() }}
-    </div>
+    <p>{{ error() }}</p>
   }
 
   @if (!cargando() && !error()) {
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped align-middle">
-        <thead class="table-primary">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Rutina</th>
+          <th>Nivel</th>
+          <th>Ejercicios</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (workout of workouts(); track workout.id) {
           <tr>
-            <th>Rutina</th>
-            <th>Nivel</th>
-            <th>Ejercicios</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (workout of workouts(); track workout.id) {
-            <tr>
-              <td class="fw-bold">{{ workout.nombre }}</td>
-              <td>Nivel {{ workout.nivel }}</td>
-              <td>
-                <table class="table table-sm table-light mb-0">
-                  <thead>
-                    <tr>
-                      <th>Foto</th>
-                      <th>Nombre</th>
-                      <th>Descripción</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @for (ejercicio of workout.ejercicios; track ejercicio.id) {
-                      <tr>
-                        <td>
-                          @if (ejercicio.foto) {
-                            <img [src]="ejercicio.foto" [alt]="ejercicio.nombre" width="40" height="40" class="rounded" />
-                          }
-                        </td>
-                        <td class="fw-bold">{{ ejercicio.nombre }}</td>
-                        <td>{{ ejercicio.descripcion }}</td>
-                      </tr>
+            <td><strong>{{ workout.nombre }}</strong></td>
+            <td>Nivel {{ workout.nivel }}</td>
+            <td>
+              <ul>
+                @for (ejercicio of workout.ejercicios; track ejercicio.id) {
+                  <li>
+                    @if (ejercicio.foto) {
+                      <img [src]="ejercicio.foto" [alt]="ejercicio.nombre" width="30" height="30" />
                     }
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          } @empty {
-            <tr>
-              <td colspan="3" class="text-center">No hay rutinas disponibles</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+                    <strong>{{ ejercicio.nombre }}:</strong> {{ ejercicio.descripcion }}
+                  </li>
+                }
+              </ul>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">No hay rutinas disponibles</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 </main>
