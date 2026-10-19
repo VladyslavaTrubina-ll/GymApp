@@ -1,0 +1,164 @@
+{
+  "workouts": [
+    {
+      "id": 1,
+      "nombre": "Pilates Core sesión",
+      "nivel": 1,
+      "descripcion": "Rutina centrada en el fortalecimiento del abdomen y zona lumbar.",
+      "ejercicios": [
+        {
+          "id": 101,
+          "nombre": "Plank abdominal",
+          "descripcion": "Mantener la posición de plancha sobre antebrazos alineando espalda y cadera.",
+          "foto": "assets/imagen/imagen1.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 1,
+              "duracion": 45,
+              "descanso": 15,
+              "foto": "assets/imagen/imagen2.jpg"
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 1,
+              "duracion": 60,
+              "descanso": 20,
+              "foto": "assets/imagen/imagen3.jpg"
+            }
+          ]
+        },
+        {
+          "id": 102,
+          "nombre": "Glute bridge",
+          "descripcion": "Elevación de pelvis desde el suelo manteniendo la contracción de glúteos.",
+          "foto": "assets/imagen/imagen4.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 15,
+              "duracion": 30,
+              "descanso": 15,
+              "foto": "assets/imagen/imagen5.jpg"
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 15,
+              "duracion": 30,
+              "descanso": 15,
+              "foto": "assets/imagen/imagen6.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Kardio HIIT Intensivo",
+      "nivel": 3,
+      "descripcion": "Entrenamiento de intervalos de alta intensidad para quemar calorías.",
+      "ejercicios": [
+        {
+          "id": 201,
+          "nombre": "Jumping Jacks",
+          "descripcion": "Saltos coordinados abriendo y cerrando brazos y piernas.",
+          "foto": "assets/imagen/imagen7.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 30,
+              "duracion": 40,
+              "descanso": 10,
+              "foto": "assets/imagen/imagen8.jpg"
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 30,
+              "duracion": 40,
+              "descanso": 10,
+              "foto": "assets/imagen/imagen9.jpg"
+            }
+          ]
+        },
+        {
+          "id": 202,
+          "nombre": "Burpees de impacto",
+          "descripcion": "Flexión, salto e impulso vertical continuo.",
+          "foto": "assets/imagen/imagen10.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 12,
+              "duracion": 45,
+              "descanso": 20,
+              "foto": "assets/imagen/imagen11.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Movilidad y Estiramientos",
+      "nivel": 0,
+      "descripcion": "Rutina suave para principiantes enfocado en recuperar rango articular.",
+      "ejercicios": [
+        {
+          "id": 301,
+          "nombre": "Gato-Camello",
+          "descripcion": "Movilidad de la columna vertebral en posición de cuadrupedia.",
+          "foto": "assets/imagen/imagen12.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 10,
+              "duracion": 60,
+              "descanso": 10,
+              "foto": "assets/imagen/imagen13.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Fuerza y Potencia Avanzado",
+      "nivel": 4,
+      "descripcion": "Circuito exigente para usuarios experimentados.",
+      "ejercicios": [
+        {
+          "id": 401,
+          "nombre": "Flexiones con palmada",
+          "descripcion": "Push-ups explosivas despegando las manos del suelo.",
+          "foto": "assets/imagen/imagen14.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 10,
+              "duracion": 30,
+              "descanso": 30,
+              "foto": "assets/imagen/imagen15.jpg"
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 10,
+              "duracion": 30,
+              "descanso": 30,
+              "foto": "assets/images/imagen16.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
