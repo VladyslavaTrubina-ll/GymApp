@@ -11,17 +11,8 @@ import { RouterOutlet } from '@angular/router';
 
 //esto es una prueba debido a que la base de datos aún no está terminada
 
-export class App implements OnInit {
-  protected readonly title = signal('GymWeb');
-
-  rutinasService = inject(Rutinas);
-
-  workouts = this.rutinasService.workouts;
-  cargando = this.rutinasService.cargando;
-  error = this.rutinasService.error;
-
-  ngOnInit() {
-
-    this.rutinasService.getGymData();
-  }
+export class App  {
+  
+  title = "GymWeb";
+  
 }

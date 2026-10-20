@@ -1,0 +1,21 @@
+<p>vista-general works!</p>
+@if (!cargando() && !error()) {
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Rutina</th>
+                <th>Nivel</th>
+                <th>Ejercicios</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (workout of workouts(); track workout.nombre) {
+                <tr>
+                    <td><a [routerLink]="['/rutina', workout.nombre]"> {{workout.nombre}}</a></td>
+                    <td>{{workout.nivel}}</td>
+                    <td>{{workout.ejercicios.length}} ejercicios</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

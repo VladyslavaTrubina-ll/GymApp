@@ -1,26 +1,21 @@
 export interface Serie {
   nombre: string;
+  foto: string;
   repeticiones: number;
   duracion: number;
-  descanso: number;
-  foto: string;
 }
 
 export interface Ejercicio {
-  id: number;
   nombre: string;
   descripcion: string;
-  foto: string;
+  descanso: number;
   series: Serie[];
 }
 
 export interface Workout {
-  id: number;
   nombre: string;
+  descripcion: string;
   nivel: number;
+  video: string;
   ejercicios: Ejercicio[];
-  tiempoTotal?: number;
-  tiempoPrevisto?: number;
-  fecha?: string;
-  porcentajeCompletado?: number;
 }

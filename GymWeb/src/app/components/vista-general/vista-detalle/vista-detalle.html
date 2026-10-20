@@ -1,0 +1,23 @@
+<p>vista-detalle works!</p>
+@if (rutinaSeleccionada) {
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Imagen</th>
+                <th>Descripción</th>
+                <th>Duración</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(ejercicio of rutinaSeleccionada?.ejercicios; track ejercicio.nombre) {
+                <tr>
+                    <td>{{ejercicio.nombre}}</td>
+                    <td>nada</td>
+                    <td>{{ejercicio.descripcion}}</td>
+                    <td>nada</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
