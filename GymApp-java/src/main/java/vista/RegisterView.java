@@ -9,7 +9,10 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
+import controlador.RegistroCliente;
 
 public class RegisterView extends JFrame {
 
@@ -21,6 +24,7 @@ public class RegisterView extends JFrame {
     private JPasswordField passwordField;
     private JPasswordField confirmPasswordField;
     private JTextField txtFechaNacimiento;
+    
 
     /**
      * Launch the application.
@@ -81,6 +85,10 @@ public class RegisterView extends JFrame {
         txtEmail.setBounds(200, 107, 180, 20);
         contentPane.add(txtEmail);
         txtEmail.setColumns(10);
+        
+        JLabel lblMensValidacion = new JLabel("");
+        lblMensValidacion.setBounds(109, 265, 216, 14);
+        contentPane.add(lblMensValidacion);
 
         // Campo: Contraseña
         JLabel lblContrasena = new JLabel("Contraseña:");
@@ -99,6 +107,15 @@ public class RegisterView extends JFrame {
         confirmPasswordField = new JPasswordField();
         confirmPasswordField.setBounds(200, 187, 180, 20);
         contentPane.add(confirmPasswordField);
+        confirmPasswordField.addFocusListener(new FocusAdapter() { 	//cuando se haga click fuera 
+        	//	del campo de confirmar password, se verificará si son iguales y se notificara en un lbl 
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		String pass1 = new String(passwordField.getPassword());
+            	String pass2 = new String(confirmPasswordField.getPassword());
+            	lblMensValidacion.setText(RegistroCliente.verificarPass(pass1,pass2));
+        	}
+        });
 
         // Campo: Fecha de Nacimiento
         JLabel lblFechaNacimiento = new JLabel("Fecha Nac. (DD/MM/AAAA):");
@@ -134,5 +151,8 @@ public class RegisterView extends JFrame {
             }
         });
         contentPane.add(btnVolverLogin);
+        
+        
+        
     }
 }
