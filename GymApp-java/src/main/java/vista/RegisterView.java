@@ -133,6 +133,12 @@ public class RegisterView extends JFrame {
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Aquí irá la lógica de registro y validaciones
+            	String nombre = txtNombre.getText();
+            	String apellidos = txtApellidos.getText();
+            	String email = txtEmail.getText();
+            	String pass = new String(passwordField.getPassword());
+            	String fecNac = txtFechaNacimiento.getText();
+            	
             }
         });
         contentPane.add(btnRegistrar);
