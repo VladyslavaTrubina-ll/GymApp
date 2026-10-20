@@ -3,4 +3,12 @@
   <groupId>com.gymapp</groupId>
   <artifactId>GymApp-java</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<!-- Firebase Admin SDK -->
+	<dependency>
+	<groupId>com.google.firebase</groupId>
+	<artifactId>firebase-admin</artifactId>
+	<version>9.3.0</version>
+	</dependency>
+  </dependencies>
 </project>
