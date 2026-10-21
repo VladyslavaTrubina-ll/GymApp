@@ -18,7 +18,7 @@ private static Firestore firestore;
 		
 		// Cargar las credenciales desde el archivo JSON
 		FileInputStream serviceAccount =
-		new FileInputStream("C:/Users/ikasle/Downloads/gymapp-af797-firebase-adminsdk-fbsvc-793f35f030.json");
+		new FileInputStream("src/main/java/adminsdk/gymapp-af797-firebase-adminsdk-fbsvc-793f35f030.json");
 		
 		FirebaseOptions options = FirebaseOptions.builder()
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount))

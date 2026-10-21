@@ -4,10 +4,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import controller.UserController;
+import model.User;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -67,8 +79,67 @@ public class LoginView extends JFrame {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Aquí irá la lógica de validación más adelante
-			}
+				
+				// 1. Collect the values from the form
+		        String email = txtUsuario.getText().trim();
+		        String password = new String(passwordField.getPassword());
+
+		        // 2. no empty fields
+		        if (email.isEmpty() || password.isEmpty()) {
+		            JOptionPane.showMessageDialog(
+		                    LoginView.this,
+		                    "Introduce tu email y contraseña.");
+		            return;
+		        }
+
+		        try {
+		            // 3. Create the User object
+		            User user = new User();
+		            user.setEmail(email);
+		            user.setPassword(password);
+		            
+		            
+		            //4. Convert the User object into JSON
+		            Gson gson = new Gson();
+		            JsonObject jsonObject = gson.toJsonTree(user).getAsJsonObject();
+
+		            //5. Add the request type
+		            jsonObject.addProperty("action", "login");
+
+		            //6. Convert the User object into JSON
+		            String json = gson.toJson(jsonObject);
+
+		            //7. Connect to the server
+		            Socket socket = new Socket("localhost", 5000);
+
+		            //8. Send the JSON to the server
+		            PrintWriter output = new PrintWriter(
+		                    socket.getOutputStream(), true);
+
+		            output.write(json+"\n");
+		            output.flush();
+
+		            //9. Receive the server response
+		            BufferedReader input = new BufferedReader(
+		                    new InputStreamReader(socket.getInputStream()));
+
+		            String response = input.readLine();
+
+		            System.out.println( "Server response: " + response);
+		            
+		            //10. Show the response
+		            JOptionPane.showMessageDialog(LoginView.this,
+		                   "Server response: " + response);
+
+		            //11. Close the connection
+		            socket.close();
+
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(
+		                    LoginView.this,
+		                    "Error: " + ex.getMessage());
+		        }}
+			
 		});
 		btnEntrar.setBounds(169, 135, 89, 23);
 		contentPane.add(btnEntrar);

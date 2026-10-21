@@ -4,7 +4,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.UserController;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -115,7 +119,61 @@ public class RegisterView extends JFrame {
         btnRegistrar.setBounds(150, 290, 130, 30);
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí irá la lógica de registro y validaciones
+            	// Get the values from the fields
+                String nombre = txtNombre.getText().trim();
+                String apellidos = txtApellidos.getText().trim();
+                String email = txtEmail.getText().trim();
+                String password = new String(passwordField.getPassword());
+                String confirmarPassword =
+                        new String(confirmPasswordField.getPassword());
+                String fechaNacimiento = txtFechaNacimiento.getText().trim();
+
+                // Check that the fields are not empty
+                if (nombre.isEmpty() || apellidos.isEmpty()
+                        || email.isEmpty() || password.isEmpty()
+                        || confirmarPassword.isEmpty()
+                        || fechaNacimiento.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Completa todos los campos.");
+                    return;
+                }
+
+                // Check that both passwords match
+                if (!password.equals(confirmarPassword)) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Las contraseñas no coinciden.");
+                    return;
+                }
+
+                // Register the user
+                try {
+                    UserController controller = new UserController();
+
+                    controller.register(
+                            nombre,
+                            apellidos,
+                            email,
+                            password,
+                            fechaNacimiento
+                    );
+
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "¡Registro completado correctamente!");
+
+                    // Return to the login screen
+                    LoginView login = new LoginView();
+                    login.setVisible(true);
+                    dispose();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Error al registrarse: " + ex.getMessage());
+                }
             }
         });
         contentPane.add(btnRegistrar);
