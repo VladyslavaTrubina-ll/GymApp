@@ -4,5 +4,5 @@ import { VistaDetalle } from './components/vista-general/vista-detalle/vista-det
 
 export const routes: Routes = [
   { path: '', component: VistaGeneral },
-  { path: 'rutina/:id', component: VistaDetalle }
+  { path: 'rutina/:nombre', component: VistaDetalle }
 ];
