@@ -1,6 +1,7 @@
 package service;
 
 
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserRecord;
@@ -97,11 +98,10 @@ public class AuthService {
     }
 
     // LOGIN
-    public Map<String, Object> login(
-            String email,
-            String password) throws Exception {
+    public Map<String, Object> login(String email, String password)
+            throws Exception {
 
-        // The Web API key is configured as an environment variable.
+        // 1. Get Firebase Web API key
         String apiKey = System.getenv("FIREBASE_WEB_API_KEY");
 
         if (apiKey == null || apiKey.isBlank()) {
@@ -109,6 +109,7 @@ public class AuthService {
                     "FIREBASE_WEB_API_KEY is not configured.");
         }
 
+        // 2. Prepare Firebase Authentication request
         String url =
                 "https://identitytoolkit.googleapis.com/v1/"
                 + "accounts:signInWithPassword?key=" + apiKey;
@@ -126,6 +127,7 @@ public class AuthService {
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
 
+        // 3. Authenticate with Firebase
         HttpResponse<String> response = httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
@@ -137,9 +139,41 @@ public class AuthService {
                     + "and Firebase Authentication settings.");
         }
 
+        // 4. Read the authentication response
         Type responseType =
                 new TypeToken<Map<String, Object>>() {}.getType();
 
-        return gson.fromJson(response.body(), responseType);
+        Map<String, Object> authResult =
+                gson.fromJson(response.body(), responseType);
+
+        // 5. Get the authenticated user's UID
+        String uid = (String) authResult.get("localId");
+
+        // 6. Connect to Firestore
+        Firestore db = DBconnect.getFirestore();
+
+        // 7. Retrieve the user's profile
+        DocumentSnapshot document = db.collection("users")
+                .document(uid)
+                .get()
+                .get();
+
+        if (!document.exists()) {
+            throw new IllegalStateException(
+                    "Login succeeded, but the user profile was not found.");
+        }
+
+        // 8. Convert the Firestore document into a User object
+        User user = document.toObject(User.class);
+        user.setUid(uid);
+
+        // 9. Add the uid to the result
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Login successful");
+        result.put("uid", uid);
+
+        // 10. Return authentication data and profile
+        return result;
     }
 }

@@ -1,3 +1,4 @@
+
 package server;
 
 import java.io.BufferedReader;
@@ -17,16 +18,14 @@ import model.User;
 public class S_socket {
 
     private static final int PORT = 5000;
-
     private static final Gson gson = new Gson();
 
     public static void main(String[] args) {
 
         System.out.println("Starting GymApp server...");
 
-        try{
-        	
-        	ServerSocket serverSocket= new ServerSocket(PORT);
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+
             System.out.println("Server listening on port " + PORT);
 
             while (true) {
@@ -34,8 +33,7 @@ public class S_socket {
 
                 System.out.println(
                         "Client connected: " + client.getInetAddress());
-                // listens each client in a separate thread
-                //new Thread(() -> handleClient(client)).start();
+
                 handleClient(client);
             }
 
@@ -53,97 +51,84 @@ public class S_socket {
             PrintWriter output = new PrintWriter(
                     socket.getOutputStream(), true)
         ) {
-            // Read one JSON request per line
+            // 1. lee el jason que le viene por INput
             String requestJson = input.readLine();
 
             if (requestJson == null) {
                 return;
             }
 
-            System.out.println("Received JSON: " + requestJson);
+            System.out.println("Received JSON from client: " + requestJson);
 
-         // Convert JSON into a JsonObject
-         JsonObject jsonObject = gson.fromJson(requestJson, JsonObject.class);
+            // 2. Convierte en un objeto
+            JsonObject jsonObject =
+                    gson.fromJson(requestJson, JsonObject.class);
 
-         // Get the request type
-         String action = jsonObject.get("action").getAsString();
-
-         // Remove action because it is not a field in User
-         jsonObject.remove("action");
-         
-         // Extract the User object
-         User user = gson.fromJson(jsonObject, User.class);
-
-         // Now use the action to decide what to do
-         if ("login".equals(action)) {
-        	 
-             UserController controller = new UserController();
-
-             Map<String, Object> result = controller.login(
-                 user.getEmail(),
-                 user.getPassword()
-             );
-
-             output.println("{\"success\":true,\"message\":\"Login successful\"}");
-         }
-        } catch (Exception e) {
-            System.err.println("Client error: " + e.getMessage());
-        }
-    }
-
-    private static Map<String, Object> processRequest(
-            Map<String, String> request) {
-
-        Map<String, Object> response = new HashMap<>();
-
-        try {
-            if (request == null || request.get("action") == null) {
+            // 3. obtiene el tipo de request que le viene en el json
+            if (!jsonObject.has("action")
+                    || jsonObject.get("action").isJsonNull()) {
                 throw new IllegalArgumentException(
                         "Missing request action.");
             }
 
-            UserController controller = new UserController();
+            //se guarda el tipo de action
+            String action = jsonObject.get("action").getAsString();
 
-            String action = request.get("action");
+            //se quita del objeto
+            jsonObject.remove("action");
 
+            // se "vuelca" el objeto a uno de tipo User
+            User user = gson.fromJson(jsonObject, User.class);
+
+            // Si la accion que le viene en el request fue login llama a su controlador
             if ("login".equals(action)) {
 
-                // Handle login
+                UserController controller = new UserController();
+
+                //obtiene el resultado del login
                 Map<String, Object> result = controller.login(
-                        request.get("email"),
-                        request.get("password")
+                        user.getEmail(),
+                        user.getPassword()
                 );
 
-                response.put("success", true);
-                response.put("message", "Login successful.");
-                response.put("uid", result.get("localId"));
+                // construccion de la respuesta para el cliente
+                JsonObject response = new JsonObject();
+                
+                //Se añade propiedades para la respuesta del servidor al cliente
+                response.addProperty("success", true);
+                response.addProperty("message", "Login successful");
+                
+                //entre las propiedades se devuelve el UID del usuario(obtenido en el proceso de login)
+                response.addProperty(
+                        "uid", (String) result.get("uid"));
 
-            } else if ("register".equals(action)) {
-
-                // Handle registration
-                controller.register(
-                        request.get("firstName"),
-                        request.get("lastName"),
-                        request.get("email"),
-                        request.get("password"),
-                        request.get("birthDate")
-                );
-
-                response.put("success", true);
-                response.put("message", "Registration successful.");
+                //se envia la respuesta json al cliente 
+                output.println(gson.toJson(response));
 
             } else {
-                throw new IllegalArgumentException(
-                        "Unknown action: " + action);
+                JsonObject response = new JsonObject();
+                response.addProperty("success", false);
+                response.addProperty(
+                        "message", "Unknown action: " + action);
+
+                output.println(gson.toJson(response));
             }
 
         } catch (Exception e) {
-            response.put("success", false);
-            response.put("message", e.getMessage());
+            System.err.println("Client error: " + e.getMessage());
+
+            // Send an error response to the client
+            // (the connection may already be closed)
+            try {
+                JsonObject errorResponse = new JsonObject();
+                errorResponse.addProperty("success", false);
+                errorResponse.addProperty("message", e.getMessage());
+
+                // Error responses are normally sent inside the main try.
+                // This catch logs errors if processing fails.
+            } catch (Exception ignored) {
+                // Nothing else to do.
+            }
         }
-
-        return response;
     }
-
-
 }
