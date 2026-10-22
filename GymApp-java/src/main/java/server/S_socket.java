@@ -101,7 +101,7 @@ public class S_socket {
                 //entre las propiedades se devuelve el UID del usuario(obtenido en el proceso de login)
                 response.addProperty(
                         "uid", (String) result.get("uid"));
-
+                System.out.println("user logged:"+response);
                 //se envia la respuesta json al cliente 
                 output.println(gson.toJson(response));
 

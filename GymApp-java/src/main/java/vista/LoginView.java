@@ -124,12 +124,21 @@ public class LoginView extends JFrame {
 		                    new InputStreamReader(socket.getInputStream()));
 
 		            String response = input.readLine();
+		            
+		         // Convert the String into a JSON object
+		            JsonObject jsonResponse = new Gson().fromJson(
+		                    response, JsonObject.class);
 
+		            // Access individual fields
+		            boolean success = jsonResponse.get("success").getAsBoolean();
+		            String message = jsonResponse.get("message").getAsString();
+		            String uid = jsonResponse.get("uid").getAsString();
+		            
 		            System.out.println( "Server response: " + response);
 		            
 		            //10. Show the response
 		            JOptionPane.showMessageDialog(LoginView.this,
-		                   "Server response: " + response);
+		                   message);
 
 		            //11. Close the connection
 		            socket.close();
