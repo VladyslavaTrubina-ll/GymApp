@@ -6,7 +6,7 @@
        
         <select name="filtroNivel" [(ngModel)]="nivelSeleccionado">
         
-        <option value="Nivel" selected >Todos los niveles</option>
+        <option value="" selected >Todos los niveles</option>
         <option value="Principiante">Principiante</option>
         <option value="Intermedio">Intermedio</option>
         <option value="Avanzado">Avanzado</option>
@@ -15,16 +15,23 @@
 
 </div>
 
+<div class="busqueda">
+
+    <input type="text" placeholder="Buscar workouts..." [(ngModel)]="rutinasService.busquedaInput">
+
+</div>
+
 @if (!cargando() && !error()) {
-    <div class="contenedor-rutinas">
-        @for (workout of workoutsFiltro(); track workout.nombre) {
-            <div class="">
+
+
+    <div class="contenedor-Workouts">
+        @for (workout of workoutsFiltroYBusqueda(); track workout.nombre) {
+            <div class="listaWorkouts">
                 <div class="campoWorkout">
 
                     <span class="etiqueta"></span>
 
                     <a [routerLink]="['/rutina', workout.nombre]" class="enlace-rutina">
-
                         {{ workout.nombre }}
 
                     </a>
@@ -34,11 +41,20 @@
                 <div class="campoNivel">
 
                     <span class="etiqueta">Nivel:</span>
-                    <span class="valor-nivel">{{ workout.nivel }}</span>
+                    <span class="valorNivel">{{ workout.nivel }}</span>
 
                 </div>
 
             </div>
+        } @empty {
+
+            <div class="sinResultados">
+                <p>No se encontraron han encontrado workouts relacionados con su búsqueda.</p>
+
+                <p class="sugerencia">Intenta seleccionar otro nivel de dificultad u otro workout.</p>
+            </div>
         }
     </div>
-}
+    
+} 
+

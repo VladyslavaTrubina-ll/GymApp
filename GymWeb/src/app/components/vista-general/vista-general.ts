@@ -3,7 +3,7 @@ import { Rutinas } from '../../services/rutinas';
 import { RouterLink } from '@angular/router';
 import { computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { form } from '@angular/forms/signals';
+
 
 @Component({
   imports: [RouterLink, FormsModule],
@@ -22,32 +22,37 @@ ngOnInit(): void {
   this.rutinasService.getGymData();
 }
 
-nivelSeleccionado = signal<string>("");
+//FILTRO y BUSQUEDA UNIDOS
 
-workoutsFiltro = computed(() => {
+nivelSeleccionado = this.rutinasService.nivelSeleccionado;
+
+workoutsFiltroYBusqueda = computed(() => {
   
-  const lista = this.rutinasService.workouts();
-const filtro = this.nivelSeleccionado();
+const lista = this.rutinasService.workouts();
+const filtro = this.rutinasService.nivelSeleccionado();
+const busqueda = this.rutinasService.busquedaInput().toLowerCase();
 
-if (!filtro) {
-
-  return lista;
-
-} else {
 
   return lista.filter(workout => {
+    
     const nivel = Number(workout.nivel);
+    let filtroBien = true;
 
     if (filtro === 'Principiante') {
-      return nivel >= 0 && nivel <= 1;
+      filtroBien = nivel >= 0 && nivel <= 1;
     } else if (filtro === 'Intermedio') {
-      return nivel === 2;
+      filtroBien = nivel === 2;
     } else if (filtro === 'Avanzado') {
-      return nivel === 3;
+      filtroBien = nivel === 3;
     }
 
-    return true;
+  const nombreWorkout = workout.nombre.toLowerCase();
+  const buscadorBien = !busqueda || nombreWorkout.includes(busqueda)
+
+  
+
+    return filtroBien && buscadorBien;
 });
-    }
-  });
+});
+
 }

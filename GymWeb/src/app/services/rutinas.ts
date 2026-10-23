@@ -12,6 +12,8 @@ export class Rutinas {
   cargando = signal<boolean>(false);
   error = signal<string | boolean>(false);
 
+  nivelSeleccionado = signal<string>("");
+  busquedaInput = signal<string>("");
 
   constructor() {
     this.getGymData();
@@ -37,4 +39,5 @@ export class Rutinas {
     });
   }
 }
+
 
