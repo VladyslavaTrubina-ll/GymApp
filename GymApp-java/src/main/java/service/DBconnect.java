@@ -16,9 +16,12 @@ private static Firestore firestore;
 	public static Firestore getFirestore() throws IOException {
 	if (firestore == null) {
 		
+		//	verificar el archivo segun el miembro del equipo que realice la conexion
+		String key = "src/main/java/adminsdk/gymapp-af797-firebase-adminsdk-fbsvc-793f35f030.json";
+		
 		// Cargar las credenciales desde el archivo JSON
 		FileInputStream serviceAccount =
-		new FileInputStream("src/main/java/adminsdk/gymapp-af797-firebase-adminsdk-fbsvc-793f35f030.json");
+		new FileInputStream(key);
 		
 		FirebaseOptions options = FirebaseOptions.builder()
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount))
