@@ -1,21 +1,44 @@
 <p>vista-general works!</p>
+
+<div class="filtrador">
+
+    <label for="filtrador" id="lblFiltro">Filtro por dificultad</label>
+       
+        <select name="filtroNivel" [(ngModel)]="nivelSeleccionado">
+        
+        <option value="Nivel" selected >Todos los niveles</option>
+        <option value="Principiante">Principiante</option>
+        <option value="Intermedio">Intermedio</option>
+        <option value="Avanzado">Avanzado</option>
+
+    </select>
+
+</div>
+
 @if (!cargando() && !error()) {
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Rutina</th>
-                <th>Nivel</th>
-                <th>Ejercicios</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (workout of workouts(); track workout.nombre) {
-                <tr>
-                    <td><a [routerLink]="['/rutina', workout.nombre]"> {{workout.nombre}}</a></td>
-                    <td>{{workout.nivel}}</td>
-                    <td>{{workout.ejercicios.length}} ejercicios</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="contenedor-rutinas">
+        @for (workout of workoutsFiltro(); track workout.nombre) {
+            <div class="">
+                <div class="campoWorkout">
+
+                    <span class="etiqueta"></span>
+
+                    <a [routerLink]="['/rutina', workout.nombre]" class="enlace-rutina">
+
+                        {{ workout.nombre }}
+
+                    </a>
+
+                </div>
+
+                <div class="campoNivel">
+
+                    <span class="etiqueta">Nivel:</span>
+                    <span class="valor-nivel">{{ workout.nivel }}</span>
+
+                </div>
+
+            </div>
+        }
+    </div>
 }
