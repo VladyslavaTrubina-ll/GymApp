@@ -142,8 +142,23 @@ public class LoginView extends JFrame {
 
 		            if (success) {
 		                String uid = jsonResponse.get("uid").getAsString();
-
-		                // Continue with the successful login using uid
+		                // Abrimos la pantalla principal (HomeView) de forma segura en el hilo de la interfaz gráfica (EDT)
+		                EventQueue.invokeLater(new Runnable() {
+		                    public void run() {
+		                        try {
+		                        	// Creamos la ventana HomeView pasando el UID del usuario autenticado
+		                            HomeView homeFrame = new HomeView(uid); 
+		                            homeFrame.setVisible(true);
+		                            
+		                            // Cerramos y liberamos la memoria de la ventana de login actual
+		                            LoginView.this.dispose(); 
+		                        } catch (Exception e) {
+		                            e.printStackTrace();
+		                        }
+		                    }
+		                });
+		                socket.close();
+		                return; 
 		            }
 
 		            JOptionPane.showMessageDialog(LoginView.this, message);

@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+
+import service.UserService;
+
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -37,6 +40,9 @@ public class HomeView extends JFrame {
     // Almacena el nivel actual del usuario (se mantiene en memoria al editar)
     private int currentLevel = 0;
 
+    // Variables para la integración con Firestore
+    private final UserService userService = new UserService();
+    private String currentUserId; // Идентификатор текущего авторизованного пользователя
     /**
      * Punto de entrada de la aplicación. Levanta la interfaz gráfica.
      */
