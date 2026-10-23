@@ -129,14 +129,17 @@ public class RegisterView extends JFrame {
                 String fechaNacimiento = txtFechaNacimiento.getText().trim();
 
                 // Check that the fields are not empty
-                if (nombre.isEmpty() || apellidos.isEmpty()
-                        || email.isEmpty() || password.isEmpty()
+                if (nombre.isEmpty()
+                        || apellidos.isEmpty()
+                        || email.isEmpty()
+                        || password.isEmpty()
                         || confirmarPassword.isEmpty()
                         || fechaNacimiento.isEmpty()) {
 
                     JOptionPane.showMessageDialog(
                             RegisterView.this,
-                            "Completa todos los campos.");
+                            "Completa todos los campos."
+                    );
                     return;
                 }
 
@@ -144,7 +147,72 @@ public class RegisterView extends JFrame {
                 if (!password.equals(confirmarPassword)) {
                     JOptionPane.showMessageDialog(
                             RegisterView.this,
-                            "Las contraseñas no coinciden.");
+                            "Las contraseñas no coinciden."
+                    );
+                    return;
+                }
+
+                // Check that the name contains valid characters
+                if (!nombre.matches("[\\p{L}][\\p{L} '\\-]*")) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Introduce un nombre válido."
+                    );
+                    return;
+                }
+
+                // Check that the surname contains valid characters
+                if (!apellidos.matches("[\\p{L}][\\p{L} '\\-]*")) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Introduce unos apellidos válidos."
+                    );
+                    return;
+                }
+
+                // Check that the email has a valid format
+                if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Introduce un email válido."
+                    );
+                    return;
+                }
+
+                // Check that the password has at least 8 characters
+                if (password.length() < 8) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "La contraseña debe tener al menos 8 caracteres."
+                    );
+                    return;
+                }
+
+                // Check that the birth date has the format dd/MM/yyyy
+                try {
+                    java.time.format.DateTimeFormatter formatter =
+                            java.time.format.DateTimeFormatter
+                                    .ofPattern("dd/MM/uuuu")
+                                    .withResolverStyle(
+                                            java.time.format.ResolverStyle.STRICT
+                                    );
+
+                    java.time.LocalDate fecha =
+                            java.time.LocalDate.parse(fechaNacimiento, formatter);
+
+                    if (fecha.isAfter(java.time.LocalDate.now())) {
+                        JOptionPane.showMessageDialog(
+                                RegisterView.this,
+                                "La fecha de nacimiento no puede ser futura."
+                        );
+                        return;
+                    }
+
+                } catch (java.time.format.DateTimeParseException ex) {
+                    JOptionPane.showMessageDialog(
+                            RegisterView.this,
+                            "Introduce una fecha válida con formato dd/MM/yyyy."
+                    );
                     return;
                 }
 
@@ -162,7 +230,8 @@ public class RegisterView extends JFrame {
 
                     JOptionPane.showMessageDialog(
                             RegisterView.this,
-                            "¡Registro completado correctamente!");
+                            "¡Registro completado correctamente!"
+                    );
 
                     // Return to the login screen
                     LoginView login = new LoginView();
@@ -172,7 +241,8 @@ public class RegisterView extends JFrame {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(
                             RegisterView.this,
-                            "Error al registrarse: " + ex.getMessage());
+                            "Error al registrarse: " + ex.getMessage()
+                    );
                 }
             }
         });
