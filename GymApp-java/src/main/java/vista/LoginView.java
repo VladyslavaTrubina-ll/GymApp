@@ -130,16 +130,24 @@ public class LoginView extends JFrame {
 		                    response, JsonObject.class);
 
 		            // Access individual fields
+		         // Access individual fields
 		            boolean success = jsonResponse.get("success").getAsBoolean();
-		            String message = jsonResponse.get("message").getAsString();
-		            String uid = jsonResponse.get("uid").getAsString();
-		            
-		            System.out.println( "Server response: " + response);
-		            
-		            //10. Show the response
-		            JOptionPane.showMessageDialog(LoginView.this,
-		                   message);
 
+		            String message = jsonResponse.has("message")
+		                    && !jsonResponse.get("message").isJsonNull()
+		                    ? jsonResponse.get("message").getAsString()
+		                    : "No message received from server.";
+
+		            System.out.println("Server response: " + response);
+
+		            if (success) {
+		                String uid = jsonResponse.get("uid").getAsString();
+
+		                // Continue with the successful login using uid
+		            }
+
+		            JOptionPane.showMessageDialog(LoginView.this, message);
+		            
 		            //11. Close the connection
 		            socket.close();
 

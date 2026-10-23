@@ -134,9 +134,10 @@ public class AuthService {
         );
 
         if (response.statusCode() != 200) {
-            throw new IllegalArgumentException(
-                    "Login failed. Check your credentials "
-                    + "and Firebase Authentication settings.");
+            Map<String, Object> result = new HashMap<>();
+            result.put("success", false);
+            result.put("message", "Login failed. Check your email and password.");
+            return result;
         }
 
         // 4. Read the authentication response

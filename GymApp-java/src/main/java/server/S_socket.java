@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -54,8 +53,9 @@ public class S_socket {
             // 1. lee el jason que le viene por INput
             String requestJson = input.readLine();
 
-            if (requestJson == null) {
-                return;
+            if (requestJson == null || requestJson.isBlank()) {
+                throw new IllegalArgumentException(
+                        "Empty request received.");
             }
 
             System.out.println("Received JSON from client: " + requestJson);
@@ -63,6 +63,11 @@ public class S_socket {
             // 2. Convierte en un objeto
             JsonObject jsonObject =
                     gson.fromJson(requestJson, JsonObject.class);
+
+            if (jsonObject == null) {
+                throw new IllegalArgumentException(
+                        "Invalid JSON request.");
+            }
 
             // 3. obtiene el tipo de request que le viene en el json
             if (!jsonObject.has("action")
@@ -91,19 +96,13 @@ public class S_socket {
                         user.getPassword()
                 );
 
-                // construccion de la respuesta para el cliente
-                JsonObject response = new JsonObject();
-                
-                //Se añade propiedades para la respuesta del servidor al cliente
-                response.addProperty("success", true);
-                response.addProperty("message", "Login successful");
-                
-                //entre las propiedades se devuelve el UID del usuario(obtenido en el proceso de login)
-                response.addProperty(
-                        "uid", (String) result.get("uid"));
-                System.out.println("user logged:"+response);
-                //se envia la respuesta json al cliente 
-                output.println(gson.toJson(response));
+                //se envia directamente el resultado del login al cliente
+                String response = gson.toJson(result);
+
+                System.out.println("Login result: " + response);
+
+                output.write(response + "\n");
+                output.flush();
 
             } else {
                 JsonObject response = new JsonObject();
@@ -111,24 +110,37 @@ public class S_socket {
                 response.addProperty(
                         "message", "Unknown action: " + action);
 
-                output.println(gson.toJson(response));
+                output.write(gson.toJson(response) + "\n");
+                output.flush();
             }
 
         } catch (Exception e) {
             System.err.println("Client error: " + e.getMessage());
 
             // Send an error response to the client
-            // (the connection may already be closed)
             try {
                 JsonObject errorResponse = new JsonObject();
                 errorResponse.addProperty("success", false);
-                errorResponse.addProperty("message", e.getMessage());
+                errorResponse.addProperty(
+                        "message",
+                        e.getMessage() == null
+                                ? "An unexpected server error occurred."
+                                : e.getMessage());
 
-                // Error responses are normally sent inside the main try.
-                // This catch logs errors if processing fails.
+                outputErrorResponse(client, errorResponse);
             } catch (Exception ignored) {
                 // Nothing else to do.
             }
         }
+    }
+
+    private static void outputErrorResponse(
+            Socket client, JsonObject errorResponse) throws Exception {
+
+        PrintWriter output = new PrintWriter(
+                client.getOutputStream(), true);
+
+        output.write(gson.toJson(errorResponse) + "\n");
+        output.flush();
     }
 }
