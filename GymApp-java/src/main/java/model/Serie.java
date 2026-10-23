@@ -1,6 +1,10 @@
 package model;
 
-public class Serie {
+import java.io.Serializable;
+
+public class Serie implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int descanso;
 	private int duracion;
 	private String foto;

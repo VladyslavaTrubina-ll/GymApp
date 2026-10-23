@@ -1,8 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Workout {
+public class Workout implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String video;
 	private int level;
