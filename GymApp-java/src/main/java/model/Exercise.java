@@ -1,0 +1,57 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Exercise {
+	private String nombre;
+	private String descripcion;
+	private ArrayList<Serie> series;
+	
+	public Exercise() {
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the descripcion
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	/**
+	 * @param descripcion the descripcion to set
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the series
+	 */
+	public ArrayList<Serie> getSeries() {
+		return series;
+	}
+
+	/**
+	 * @param series the series to set
+	 */
+	public void setSeries(ArrayList<Serie> series) {
+		this.series = series;
+	}
+	
+	
+
+}
