@@ -91,7 +91,7 @@ public class LoginView extends JFrame {
 		                    "Introduce tu email y contraseña.");
 		            return;
 		        }
-
+		        Socket socket = null; 
 		        try {
 		            // 3. Create the User object
 		            User user = new User();
@@ -110,7 +110,7 @@ public class LoginView extends JFrame {
 		            String json = gson.toJson(jsonObject);
 
 		            //7. Connect to the server
-		            Socket socket = new Socket("localhost", 5000);
+		            socket = new Socket("localhost", 5000);
 
 		            //8. Send the JSON to the server
 		            PrintWriter output = new PrintWriter(
@@ -130,7 +130,7 @@ public class LoginView extends JFrame {
 		                    response, JsonObject.class);
 
 		            // Access individual fields
-		         // Access individual fields
+		            // Access individual fields
 		            boolean success = jsonResponse.get("success").getAsBoolean();
 
 		            String message = jsonResponse.has("message")
@@ -142,21 +142,41 @@ public class LoginView extends JFrame {
 
 		            if (success) {
 		                String uid = jsonResponse.get("uid").getAsString();
-
-		                // Continue with the successful login using uid
+		                // Abrimos la pantalla principal (HomeView) de forma segura en el hilo de la interfaz gráfica (EDT)
+		                EventQueue.invokeLater(new Runnable() {
+		                    public void run() {
+		                        try {
+		                        	// Creamos la ventana HomeView pasando el UID del usuario autenticado
+		                            HomeView homeFrame = new HomeView(uid); 
+		                            homeFrame.setVisible(true);        
+		                            // Cerramos y liberamos la memoria de la ventana de login actual
+		                            LoginView.this.dispose(); 
+		                            
+		                        } catch (Exception e) {
+		                            e.printStackTrace();
+		                        }
+		                    }
+		                });
+		                return; // El socket se cerrará automáticamente más abajo, en el bloque «finally»
 		            }
-
 		            JOptionPane.showMessageDialog(LoginView.this, message);
 		            
-		            //11. Close the connection
-		            socket.close();
-
 		        } catch (Exception ex) {
 		            JOptionPane.showMessageDialog(
 		                    LoginView.this,
 		                    "Error: " + ex.getMessage());
-		        }}
-			
+		        } finally {
+		            //El bloque «finally» se ejecuta SIEMPRE, incluso si se ha producido un error en el bloque «try».
+		            //Garantiza que el socket no quede abierto.
+		            if (socket != null && !socket.isClosed()) {
+		                try {
+		                    socket.close();
+		                } catch (Exception ex) {
+		                    ex.printStackTrace();
+		                }
+		            }
+		        }
+			}
 		});
 		btnEntrar.setBounds(169, 135, 89, 23);
 		contentPane.add(btnEntrar);

@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+
+import service.UserService;
+
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -37,6 +40,9 @@ public class HomeView extends JFrame {
     // Almacena el nivel actual del usuario (se mantiene en memoria al editar)
     private int currentLevel = 0;
 
+    // Variables para la integración con Firestore
+    private final UserService userService = new UserService();
+    private String currentUserId; // Идентификатор текущего авторизованного пользователя
     /**
      * Punto de entrada de la aplicación. Levanta la interfaz gráfica.
      */
@@ -44,7 +50,7 @@ public class HomeView extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    HomeView frame = new HomeView();
+                    HomeView frame = new HomeView("test_uid_123");
                     frame.setVisible(true); // Hace visible la ventana principal
                     
                     // Simulación inicial: Carga datos de prueba que vendrían de la base de datos
@@ -61,7 +67,9 @@ public class HomeView extends JFrame {
     /**
      * Create the frame.
      */
-    public HomeView() {
+    public HomeView(String uid) {
+    	this.currentUserId = uid; //Gvardar id usuario logiado
+    	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 480, 320);
         contentPane = new JPanel();
@@ -182,7 +190,61 @@ public class HomeView extends JFrame {
 
         // Inicialmente mostramos el modo de visualización
         cardLayout.show(cardPanel, "VIEW_MODE");
+     // Iniciamos la carga de BD los datos de usuario
+        loadUserData(uid);
     }
+    //Método para obtener datos a través de tu UserService
+    private void loadUserData(String uid) {
+    	// Iniciamos el flujo en segundo plano
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // 1. Realizamos una solicitud asíncrona a Firestore a través de UserService
+                    // Metod .get() espera a que finalice la operación de red y devuelve DocumentSnapshot
+                    com.google.cloud.firestore.DocumentSnapshot document = userService.getUserProfileAsync(uid).get();
+
+                    // 2. Revisa si existe el documento del usuario en la BD
+                    if (document.exists()) {
+                        // Extraemos las cadenas comprobando si son nulas (por si acaso algún campo de la BD está vacío)
+                        final String firstName = document.getString("firstName") != null ? document.getString("firstName") : "";
+                        final String lastName = document.getString("lastName") != null ? document.getString("lastName") : "";
+                        final String email = document.getString("email") != null ? document.getString("email") : "";
+                        final String birthDate = document.getString("birthDate") != null ? document.getString("birthDate") : "";
+                        
+                        // Extraemos el valor como tipo «long», ya que Firestore almacena los números como «Long»
+                        Long levelLong = document.getLong("level");
+                        final int level = levelLong != null ? levelLong.intValue() : 0;
+
+                        // 3. Actualizamos los elementos de la interfaz gráfica Swing estrictamente en el hilo EDT
+                        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateUserData(firstName, lastName, email, birthDate, level);
+                            }
+                        });
+                    } else {
+                        System.err.println("Perfil de usuario con ID " + uid + "no existe en Firestore.");
+                        javax.swing.JOptionPane.showMessageDialog(HomeView.this, 
+                            "Error: No se ha encontrado el perfil de usuario.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // En caso de que se produzca un error de red o de Firestore, mostramos una notificación al usuario.
+                    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            javax.swing.JOptionPane.showMessageDialog(HomeView.this, 
+                                "No se han podido cargar los datos del perfil: " + e.getMessage(), 
+                                "Error de conexión", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+    
 
     /**
      * Método para la actualización dinámica de datos
