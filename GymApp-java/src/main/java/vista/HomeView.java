@@ -50,7 +50,7 @@ public class HomeView extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    HomeView frame = new HomeView();
+                    HomeView frame = new HomeView("test_uid_123");
                     frame.setVisible(true); // Hace visible la ventana principal
                     
                     // Simulación inicial: Carga datos de prueba que vendrían de la base de datos
@@ -67,7 +67,9 @@ public class HomeView extends JFrame {
     /**
      * Create the frame.
      */
-    public HomeView() {
+    public HomeView(String uid) {
+    	this.currentUserId = uid;
+    	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 480, 320);
         contentPane = new JPanel();
