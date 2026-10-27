@@ -1,34 +1,38 @@
-<p>vista-detalle works!</p>
+<main class="fondo-app">
 
-<div class="filtrador">
-    <select name="filtroNivel">
-        <option value="Principiante">Avanzado</option>
-        <option value="Intermedio">Intermedio</option>
-        <option value="Avanzado">Avanzado</option>
-    </select>
-</div>
+    <header class="Cabecera">
+    
+    <div class="titulo">GymWeb</div>
 
-@if (rutinaSeleccionada()) {
-    <table border="2">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Foto</th>
-                <th>Descripción</th>
-                <th>Duración</th>
-            </tr>
-        </thead>
+    </header>
 
-        <tbody>
-            @for (ejercicio of rutinaSeleccionada().ejercicios; track ejercicio.nombre) {
+    @if (rutinaSeleccionada()) {
+        <table border="2">
+            <thead>
                 <tr>
-                    <td>{{ ejercicio.nombre | uppercase | slice:0:15 }}</td>
-                    <td><img src="ejercicio.foto" alt="ejercicio"></td>
-                    <td>{{ejercicio.descripcion}}</td>
-                    <td>{{funcionDuracionEjercicio(ejercicio.descanso, ejercicio.series[0].duracion, ejercicio.series.length) | formatoDuracion}}</td>
+                    <th>Nombre</th>
+                    <th>Foto</th>
+                    <th>Descripción</th>
+                    <th>Duración</th>
                 </tr>
-            }
-        </tbody>
+            </thead>
 
-    </table>
-}
+            <tbody>
+                @for (ejercicio of rutinaSeleccionada().ejercicios; track ejercicio.nombre) {
+                    <tr>
+                        <td>{{ ejercicio.nombre | uppercase | slice:0:30 }}</td>
+                        <td class="foto"><img src="https://i.pinimg.com/564x/eb/e0/47/ebe047eb4f075ee915dac462e1a46556.jpg" alt="ejercicio"></td>
+                        <td>{{ejercicio.descripcion}}</td>
+                        <td>{{funcionDuracionEjercicio(ejercicio.descanso, ejercicio.series[0].duracion, ejercicio.series.length) | formatoDuracion}}</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+
+    <footer class="pie">
+        <p>🏋️ GymWeb &copy; 2026 - Todos los derechos reservados</p>
+    </footer>
+
+</main>
