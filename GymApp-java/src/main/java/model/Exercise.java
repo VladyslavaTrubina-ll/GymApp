@@ -2,16 +2,18 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Exercise implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String descripcion;
-	private ArrayList<Serie> series;
+	private List<Serie> series;
 	
 	public Exercise() {
 	}
+	
 
 	/**
 	 * @return the nombre
@@ -44,7 +46,7 @@ public class Exercise implements Serializable{
 	/**
 	 * @return the series
 	 */
-	public ArrayList<Serie> getSeries() {
+	public List<Serie> getSeries() {
 		return series;
 	}
 
