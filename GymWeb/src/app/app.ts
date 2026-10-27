@@ -12,7 +12,5 @@ import { RouterOutlet } from '@angular/router';
 //esto es una prueba debido a que la base de datos aún no está terminada
 
 export class App  {
-  
-  title = "GymWeb";
-  
+    
 }

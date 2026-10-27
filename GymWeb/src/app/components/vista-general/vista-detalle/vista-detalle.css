@@ -1,0 +1,99 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.fondo-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+background-color: #7f97e7;
+}
+
+.Cabecera, .pie {
+  background: rgba(15, 23, 42, 0.85);
+  padding: 1.25rem;
+  text-align: center;
+  color: #fff;
+}
+
+.Cabecera .titulo {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.pie {
+  margin-top: auto;
+}
+
+.pie p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+table {
+  max-width: 1200px;
+  margin: 2.5rem auto;
+  border-collapse: collapse;
+  border: none !important;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+th {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 1.3rem 1.5rem;
+  text-align: left;
+  font-size: 1.25rem; 
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+td {
+  padding: 1.3rem 1.5rem; 
+  border-bottom: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+td:first-child {
+  min-width: 300px;     
+  white-space: nowrap;    
+}
+
+
+td:last-child {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #1d4ed8;
+}
+
+tbody tr:hover {
+  background-color: #a85f7f;
+  transition: 0.6s;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+td.foto {
+  text-align: center;
+  width: 150px;
+}
+
+td.foto img {
+  width: 110px; 
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #94a3b8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

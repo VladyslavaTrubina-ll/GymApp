@@ -1,0 +1,129 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+.fondo-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+background-color: #7f97e7;
+}
+
+
+.Cabecera, .pie {
+  background: rgba(15, 23, 42, 0.85);
+  padding: 1.25rem;
+  text-align: center;
+  color: #fff;
+}
+
+.Cabecera .titulo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.pie {
+  margin-top: auto;
+}
+
+.pie p {
+  margin: 0;
+}
+
+.filtrador, .busqueda {
+  max-width: 1000px;
+  margin: 0 auto 1rem;
+  width: calc(100% - 3rem);
+}
+
+.filtrador {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+}
+
+#lblFiltro {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.filtrador select, .busqueda input {
+  padding: 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tarjetas */
+.contenedor-Workouts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 1rem auto;
+  margin: 2.5rem auto;
+  flex: 1;
+}
+
+.listaWorkouts {
+  flex: 0 0 280px;
+  height: 120px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.listaWorkouts:hover {
+  transform: translateY(-4px);
+}
+
+.campoWorkout {
+  font-weight: 600;
+}
+
+.enlaceWorkout {
+  color: #0f172a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.enlaceWorkout:hover {
+  color: #2563eb; 
+}
+
+.campoNivel {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.etiqueta {
+  color: #64748b;
+}
+
+.valorNivel {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+
+.sinResultados {
+  flex: 1;
+  background: #fff;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: center;
+}

@@ -30,7 +30,7 @@ workoutsFiltroYBusqueda = computed(() => {
   
 const lista = this.rutinasService.workouts();
 const filtro = this.rutinasService.nivelSeleccionado();
-const busqueda = this.rutinasService.busquedaInput().toLowerCase();
+const busqueda = this.rutinasService.busquedaInput().toLowerCase().trim();
 
 
   return lista.filter(workout => {
@@ -48,8 +48,6 @@ const busqueda = this.rutinasService.busquedaInput().toLowerCase();
 
   const nombreWorkout = workout.nombre.toLowerCase();
   const buscadorBien = !busqueda || nombreWorkout.includes(busqueda)
-
-  
 
     return filtroBien && buscadorBien;
 });
