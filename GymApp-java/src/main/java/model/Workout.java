@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Workout implements Serializable{
 	
@@ -9,12 +10,12 @@ public class Workout implements Serializable{
 	private String nombre;
 	private String video;
 	private int level;
-	private ArrayList<Exercise> ejercicios;
+	private List<Exercise> ejercicios;
 	
 	public Workout() {
 	}
 
-	public Workout(String nombre, String video, int level, ArrayList<Exercise> ejercicios) {
+	public Workout(String nombre, String video, int level, List<Exercise> ejercicios) {
 		this.nombre = nombre;
 		this.video = video;
 		this.level = level;
@@ -66,7 +67,7 @@ public class Workout implements Serializable{
 	/**
 	 * @return the ejercicios
 	 */
-	public ArrayList<Exercise> getEjercicios() {
+	public List<Exercise> getEjercicios() {
 		return ejercicios;
 	}
 
