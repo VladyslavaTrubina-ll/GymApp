@@ -96,120 +96,33 @@ public class HomeView extends JFrame {
 
         setTitle("GymApp | Home");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 650);
-        setMinimumSize(new Dimension(760, 500));
-        setLocationRelativeTo(null);
-
-        contentPane = new JPanel(new BorderLayout(20, 0));
-        contentPane.setBackground(BACKGROUND);
-        contentPane.setBorder(new EmptyBorder(25, 25, 25, 25));
+        setBounds(100, 100, 524, 615);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
-        // menu lateral
-        JPanel sidebar = new JPanel();
-        sidebar.setLayout(new GridLayout(6, 1, 0, 12));
-        sidebar.setPreferredSize(new Dimension(170, 0));
-        sidebar.setBackground(NAVY);
-        sidebar.setBorder(new EmptyBorder(25, 15, 25, 15));
-
-        JLabel lblBrand = new JLabel("GYMAPP", SwingConstants.CENTER);
-        lblBrand.setFont(new Font("Segoe UI", Font.BOLD, 23));
-        lblBrand.setForeground(WHITE);
-        sidebar.add(lblBrand);
-
-        JButton btnPerfil = createSidebarButton("Perfil");
-        btnPerfil.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "VIEW_MODE");
-            }
-        });
-        sidebar.add(btnPerfil);
-
-        JButton btnWorkouts = createSidebarButton("Workouts");
+        JButton btnWorkouts = new JButton("Workouts");
         btnWorkouts.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "WORKOUTS_MODE");
-                loadAvailableWorkouts();
-            }
+        	public void actionPerformed(ActionEvent e) {
+        	}
         });
-        sidebar.add(btnWorkouts);
+        btnWorkouts.setBounds(259, 416, 208, 58);
+        contentPane.add(btnWorkouts);
+        cardPanel = new JPanel();
+        cardPanel.setBounds(23, 69, 427, 289);
+        contentPane.add(cardPanel);
+        cardPanel.setLayout(null);
 
-        JButton btnHistory = createSidebarButton("Historial");
-        sidebar.add(btnHistory);
-
-        JLabel lblFooter = new JLabel(
-                "<html><center>Tu progreso<br>empieza aquí</center></html>",
-                SwingConstants.CENTER
-        );
-        lblFooter.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        lblFooter.setForeground(new Color(190, 201, 222));
-        sidebar.add(lblFooter);
-
-        contentPane.add(sidebar, BorderLayout.WEST);
-
-        // Contenedor principal
-        JPanel mainPanel = new JPanel(new BorderLayout(0, 18));
-        mainPanel.setBackground(BACKGROUND);
-
-        JLabel lblPageTitle = new JLabel("Mi perfil");
-        lblPageTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        lblPageTitle.setForeground(NAVY);
-        mainPanel.add(lblPageTitle, BorderLayout.NORTH);
-
-        // Card donde se muestra la opcion elegida por usuario
-        cardLayout = new CardLayout();
-        cardPanel = new JPanel(cardLayout);
-        cardPanel.setBackground(WHITE);
-        mainPanel.add(cardPanel, BorderLayout.CENTER);
-
-        // VIEW MODE
-        JPanel viewCard = new JPanel(new BorderLayout(10, 20));
-        viewCard.setBackground(WHITE);
-        viewCard.setBorder(new EmptyBorder(25, 25, 25, 25));
-
-        JLabel lblProfileTitle = new JLabel("Información personal");
-        lblProfileTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblProfileTitle.setForeground(NAVY);
-        viewCard.add(lblProfileTitle, BorderLayout.NORTH);
-
-        userInfoArea = new JTextArea();
-        userInfoArea.setEditable(false);
-        userInfoArea.setWrapStyleWord(true);
-        userInfoArea.setLineWrap(true);
-        userInfoArea.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        userInfoArea.setForeground(TEXT);
-        userInfoArea.setBackground(WHITE);
-        userInfoArea.setBorder(new EmptyBorder(10, 0, 10, 0));
-
-        viewCard.add(userInfoArea, BorderLayout.CENTER);
-
-        JButton btnEdit = createPrimaryButton("Editar perfil");
-        btnEdit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "EDIT_MODE");
-            }
-        });
-
-        JPanel editButtonPanel = new JPanel(new BorderLayout());
-        editButtonPanel.setBackground(WHITE);
-        editButtonPanel.add(btnEdit, BorderLayout.EAST);
-        viewCard.add(editButtonPanel, BorderLayout.SOUTH);
-
-        cardPanel.add(viewCard, "VIEW_MODE");
-
-        // EDIT MODE
-        JPanel editCard = new JPanel(new BorderLayout(10, 20));
-        editCard.setBackground(WHITE);
-        editCard.setBorder(new EmptyBorder(25, 25, 25, 25));
-
-        JLabel lblEditTitle = new JLabel("Editar información");
-        lblEditTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblEditTitle.setForeground(NAVY);
-        editCard.add(lblEditTitle, BorderLayout.NORTH);
-
-        JPanel fieldsPanel = new JPanel(new GridLayout(4, 2, 12, 12));
-        fieldsPanel.setBackground(WHITE);
-
+        // --------------------------------------------------------
+        // TARJETA 2: MODO EDICIÓN ("EDIT_MODE") - Formulario con campos de texto
+        // --------------------------------------------------------
+        JPanel editCard = new JPanel();
+        editCard.setBounds(0, 0, 300, 145);
+        editCard.setLayout(null);
+        
+        // Sub-panel organizado en una cuadrícula (4 filas, 2 columnas) para etiquetas y cajas de texto
+        JPanel fieldsPanel = new JPanel(new GridLayout(4, 2, 3, 3));
+        fieldsPanel.setBounds(0, 0, 300, 117);
         tfFirstName = new JTextField();
         tfLastName = new JTextField();
         tfEmail = new JTextField();

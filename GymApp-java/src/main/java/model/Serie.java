@@ -1,22 +1,29 @@
 package model;
 
-public class Serie {
+import java.io.Serializable;
+
+public class Serie implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int descanso;
 	private int duracion;
 	private String foto;
 	private String nombre;
 	private int repeticiones;
+	private String id;
+	
 	
 	public Serie() {
 		
 	}
 
-	public Serie(int descanso, int duracion, String foto, String nombre, int repeticiones) {
+	public Serie(int descanso, int duracion, String foto, String nombre, int repeticiones, String id) {
 		this.descanso = descanso;
 		this.duracion = duracion;
 		this.foto = foto;
 		this.nombre = nombre;
 		this.repeticiones = repeticiones;
+		this.id= id;
 	}
 
 	public int getDescanso() {
@@ -58,6 +65,18 @@ public class Serie {
 	public void setRepeticiones(int repeticiones) {
 		this.repeticiones = repeticiones;
 	}
+
+	
+	public String getId() {
+		return id;
+	}
+
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 	
 	
 }

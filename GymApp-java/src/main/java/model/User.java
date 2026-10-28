@@ -1,6 +1,92 @@
 package model;
 
-import java.util.List;
+import java.io.Serializable;
+
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	 private String uid;
+
+	    private String firstName;
+
+	    private String lastName;
+
+	    private String email;
+
+	    private String birthDate;
+
+	    private int level;
+
+	    private String password;
+
+	    /**
+		 * @return the password
+		 */
+		public String getPassword() {
+			return password;
+		}
+
+
+
+		/**
+		 * @param password the password to set
+		 */
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+
+
+		public User() {
+
+	    }
+
+
+
+	    public User(String uid, String firstName, String lastName,
+
+	                String email, String birthDate, int level) {
+
+	        this.uid = uid;
+
+	        this.firstName = firstName;
+
+	        this.lastName = lastName;
+
+	        this.email = email;
+
+	        this.birthDate = birthDate;
+
+	        this.level = level;
+
+	    }
+
+
+
+	    public String getUid() {
+
+	        return uid;
+
+	    }
+
+
+
+	    public void setUid(String uid) {
+
+	        this.uid = uid;
+
+	    }
+
+
+
+	    public String getFirstName() {
+
+	        return firstName;
+
+	    }
+
+
 
 public class User {
 
