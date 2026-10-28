@@ -6,7 +6,6 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserRecord;
 import model.User;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -66,13 +65,18 @@ public class AuthService {
 
         try {
             Firestore db = DBconnect.getFirestore();
-
+            
+         // 4. Save the profile in Firestore
             db.collection("users")
                     .document(uid)
                     .set(profile)
                     .get();
 
+            
+            return user;
+
         } catch (InterruptedException e) {
+        	
             Thread.currentThread().interrupt();
 
             try {
@@ -93,8 +97,6 @@ public class AuthService {
             throw new Exception(
                     "Could not save the user profile.", e);
         }
-
-        return user;
     }
 
     // LOGIN
@@ -147,7 +149,7 @@ public class AuthService {
         Map<String, Object> authResult =
                 gson.fromJson(response.body(), responseType);
 
-        // 5. Get the authenticated user's UID
+        // 5. Get the authenticated user UID
         String uid = (String) authResult.get("localId");
 
         // 6. Connect to Firestore

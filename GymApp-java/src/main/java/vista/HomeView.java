@@ -113,7 +113,7 @@ public class HomeView extends JFrame {
         viewCard.add(userInfoArea, BorderLayout.CENTER);
 
         // Botón que actúa como disparador (trigger) para cambiar al formulario de edición
-        JButton btnEdit = new JButton("Edit Profile");
+        JButton btnEdit = new JButton("Editar Perfil");
         btnEdit.setFont(new Font("Arial", Font.PLAIN, 11));
         btnEdit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -138,20 +138,20 @@ public class HomeView extends JFrame {
         tfEmail = new JTextField();
         tfBirthDate = new JTextField();
 
-        fieldsPanel.add(new JLabel("firstName:"));
+        fieldsPanel.add(new JLabel("Nombre:"));
         fieldsPanel.add(tfFirstName);
-        fieldsPanel.add(new JLabel("lastName:"));
+        fieldsPanel.add(new JLabel("Apellidos:"));
         fieldsPanel.add(tfLastName);
-        fieldsPanel.add(new JLabel("email:"));
+        fieldsPanel.add(new JLabel("Email:"));
         fieldsPanel.add(tfEmail);
-        fieldsPanel.add(new JLabel("birthDate:"));
+        fieldsPanel.add(new JLabel("Año de nacimiento:"));
         fieldsPanel.add(tfBirthDate);
         editCard.add(fieldsPanel, BorderLayout.CENTER);
 
         // Panel de botones de control dentro del contenedor (CORREGIDO: Declaración e inicialización añadida)
         JPanel actionButtonsPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         
-        JButton btnSave = new JButton("Save");
+        JButton btnSave = new JButton("Guardar");
         btnSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Leemos los nuevos datos
@@ -168,7 +168,7 @@ public class HomeView extends JFrame {
             }
         });
 
-        JButton btnCancel = new JButton("Cancel");
+        JButton btnCancel = new JButton("Cancelar");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Simplemente volvemos atrás sin guardar los cambios
@@ -260,11 +260,11 @@ public class HomeView extends JFrame {
 
         // Sincronizamos la descripción textual en modo lectura
         StringBuilder sb = new StringBuilder();
-        sb.append("firstName: \"").append(firstName).append("\"\n");
-        sb.append("lastName: \"").append(lastName).append("\"\n");
-        sb.append("email: \"").append(email).append("\"\n");
-        sb.append("birthDate: ").append(birthDate).append("\n");
-        sb.append("level: ").append(level);
+        sb.append("Nombre: \"").append(firstName).append("\"\n");
+        sb.append("Apellidos: \"").append(lastName).append("\"\n");
+        sb.append("Email: \"").append(email).append("\"\n");
+        sb.append("Nacimiento: ").append(birthDate).append("\n");
+        sb.append("Level: ").append(level);
         userInfoArea.setText(sb.toString());
     }
 }
