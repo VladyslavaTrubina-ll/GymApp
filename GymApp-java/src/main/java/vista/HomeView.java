@@ -24,10 +24,6 @@ public class HomeView extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     
-    // El CardLayout actúa como un "organizador de pestañas invisibles".
-    // Permite superponer varios paneles y mostrar solo uno a la vez.
-    private CardLayout cardLayout;
-    
     // Panel contenedor que usará el CardLayout para alternar entre ver y editar el perfil
     private JPanel cardPanel;
     
@@ -71,68 +67,34 @@ public class HomeView extends JFrame {
     	this.currentUserId = uid; //Gvardar id usuario logiado
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 480, 320);
+        setBounds(100, 100, 524, 615);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Botón izquierdo: Perfil (ahora solo activa o desactiva el modo de visualización)
-        JButton btnPerfil = new JButton("Perfil");
-        btnPerfil.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "VIEW_MODE");
-            }
-        });
-        btnPerfil.setBounds(20, 26, 110, 32);
-        contentPane.add(btnPerfil);
-
         JButton btnWorkouts = new JButton("Workouts");
-        btnWorkouts.setBounds(20, 89, 110, 32);
-        contentPane.add(btnWorkouts);
-
-        // ========================================================
-        // CONTENEDOR CENTRAL DINÁMICO (Usa CardLayout para alternar pantallas)
-        // ========================================================
-        cardLayout = new CardLayout();
-        cardPanel = new JPanel(cardLayout);
-        cardPanel.setBounds(150, 26, 300, 145);
-        contentPane.add(cardPanel);
-
-        // --------------------------------------------------------
-        // TARJETA 1: MODO VISTA ("VIEW_MODE") - Muestra datos y botón "Edit"
-        // --------------------------------------------------------
-        JPanel viewCard = new JPanel(new BorderLayout(5, 5));
-        userInfoArea = new JTextArea();
-        userInfoArea.setEditable(false);
-        userInfoArea.setWrapStyleWord(true);
-        userInfoArea.setLineWrap(true);
-        userInfoArea.setOpaque(false);
-        userInfoArea.setBackground(new Color(0,0,0,0));
-        userInfoArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        viewCard.add(userInfoArea, BorderLayout.CENTER);
-
-        // Botón que actúa como disparador (trigger) para cambiar al formulario de edición
-        JButton btnEdit = new JButton("Edit Profile");
-        btnEdit.setFont(new Font("Arial", Font.PLAIN, 11));
-        btnEdit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Al hacer clic, el CardLayout oculta la vista actual y despliega "EDIT_MODE"
-                cardLayout.show(cardPanel, "EDIT_MODE");
-            }
+        btnWorkouts.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
         });
-        viewCard.add(btnEdit, BorderLayout.SOUTH);
-
-        // Registramos esta tarjeta en el contenedor central bajo el identificador "VIEW_MODE"
-        cardPanel.add(viewCard, "VIEW_MODE");
+        btnWorkouts.setBounds(259, 416, 208, 58);
+        contentPane.add(btnWorkouts);
+        cardPanel = new JPanel();
+        cardPanel.setBounds(23, 69, 427, 289);
+        contentPane.add(cardPanel);
+        cardPanel.setLayout(null);
 
         // --------------------------------------------------------
         // TARJETA 2: MODO EDICIÓN ("EDIT_MODE") - Formulario con campos de texto
         // --------------------------------------------------------
-        JPanel editCard = new JPanel(new BorderLayout(5, 5));
+        JPanel editCard = new JPanel();
+        editCard.setBounds(0, 0, 300, 145);
+        editCard.setLayout(null);
         
         // Sub-panel organizado en una cuadrícula (4 filas, 2 columnas) para etiquetas y cajas de texto
         JPanel fieldsPanel = new JPanel(new GridLayout(4, 2, 3, 3));
+        fieldsPanel.setBounds(0, 0, 300, 117);
         tfFirstName = new JTextField();
         tfLastName = new JTextField();
         tfEmail = new JTextField();
@@ -146,10 +108,11 @@ public class HomeView extends JFrame {
         fieldsPanel.add(tfEmail);
         fieldsPanel.add(new JLabel("birthDate:"));
         fieldsPanel.add(tfBirthDate);
-        editCard.add(fieldsPanel, BorderLayout.CENTER);
+        editCard.add(fieldsPanel);
 
         // Panel de botones de control dentro del contenedor (CORREGIDO: Declaración e inicialización añadida)
         JPanel actionButtonsPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+        actionButtonsPanel.setBounds(0, 122, 300, 23);
         
         JButton btnSave = new JButton("Save");
         btnSave.addActionListener(new ActionListener() {
@@ -178,18 +141,48 @@ public class HomeView extends JFrame {
 
         actionButtonsPanel.add(btnSave);
         actionButtonsPanel.add(btnCancel);
-        editCard.add(actionButtonsPanel, BorderLayout.SOUTH);
+        editCard.add(actionButtonsPanel);
         
-        cardPanel.add(editCard, "EDIT_MODE");
+        cardPanel.add(editCard);
+        
+                // Botón que actúa como disparador (trigger) para cambiar al formulario de edición
+                JButton btnEdit = new JButton("Edit Profile");
+                btnEdit.setBounds(0, 249, 427, 40);
+                cardPanel.add(btnEdit);
+                btnEdit.setFont(new Font("Arial", Font.PLAIN, 11));
+                btnEdit.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Al hacer clic, el CardLayout oculta la vista actual y despliega "EDIT_MODE"
+                        cardLayout.show(cardPanel, "EDIT_MODE");
+                    }
+                });
 
         // ========================================================
         // Botón: History Workouts (se desplazó hacia abajo porque la tarjeta ahora es más grande)
         JButton btnHistory = new JButton("History Workouts");
-        btnHistory.setBounds(150, 185, 190, 65);
+        btnHistory.setBounds(36, 416, 213, 58);
         contentPane.add(btnHistory);
-
-        // Inicialmente mostramos el modo de visualización
-        cardLayout.show(cardPanel, "VIEW_MODE");
+        
+                // --------------------------------------------------------
+                // TARJETA 1: MODO VISTA ("VIEW_MODE") - Muestra datos y botón "Edit"
+                // --------------------------------------------------------
+                JPanel viewCard = new JPanel();
+                viewCard.setBounds(23, 69, 427, 250);
+                contentPane.add(viewCard);
+                viewCard.setLayout(null);
+                userInfoArea = new JTextArea();
+                userInfoArea.setBounds(0, 0, 300, 21);
+                userInfoArea.setEditable(false);
+                userInfoArea.setWrapStyleWord(true);
+                userInfoArea.setLineWrap(true);
+                userInfoArea.setOpaque(false);
+                userInfoArea.setBackground(new Color(0,0,0,0));
+                userInfoArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+                viewCard.add(userInfoArea);
+                
+                JLabel lblNewLabel = new JLabel("GymApp");
+                lblNewLabel.setBounds(203, 21, 150, 31);
+                contentPane.add(lblNewLabel);
      // Iniciamos la carga de BD los datos de usuario
         loadUserData(uid);
     }
