@@ -88,74 +88,91 @@ public class User implements Serializable{
 
 
 
-	    public void setFirstName(String firstName) {
+public class User {
 
-	        this.firstName = firstName;
+    private String uid;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String birthDate;
+    private int level;
+    private String password;
+    private WorkoutHistory workoutHistory;
 
-	    }
+    public User() {
+    }
 
+    public User(String uid, String firstName, String lastName,
+                String email, String birthDate, int level) {
+        this.uid = uid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.level = level;
+    }
 
+    public String getUid() {
+        return uid;
+    }
 
-	    public String getLastName() {
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
-	        return lastName;
+    public String getFirstName() {
+        return firstName;
+    }
 
-	    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	    public void setLastName(String lastName) {
+    public String getEmail() {
+        return email;
+    }
 
-	        this.lastName = lastName;
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	    }
+    public String getBirthDate() {
+        return birthDate;
+    }
 
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
 
+    public int getLevel() {
+        return level;
+    }
 
-	    public String getEmail() {
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-	        return email;
+    public String getPassword() {
+        return password;
+    }
 
-	    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public WorkoutHistory getWorkoutHistory() {
+        return workoutHistory;
+    }
 
-
-	    public void setEmail(String email) {
-
-	        this.email = email;
-
-	    }
-
-
-
-	    public String getBirthDate() {
-
-	        return birthDate;
-
-	    }
-
-
-
-	    public void setBirthDate(String birthDate) {
-
-	        this.birthDate = birthDate;
-
-	    }
-
-
-
-	    public int getLevel() {
-
-	        return level;
-
-	    }
-
-
-
-	    public void setLevel(int level) {
-
-	        this.level = level;
-
-	    }
-
+    public void setWorkoutHistory(WorkoutHistory workoutHistory) {
+        this.workoutHistory = workoutHistory;
+    }
 }

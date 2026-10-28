@@ -1,3 +1,4 @@
+
 package vista;
 
 import java.awt.EventQueue;
@@ -6,53 +7,79 @@ import java.awt.Color;
 import java.awt.CardLayout;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.net.URI;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
 
 import service.UserService;
+import service.WorkoutService;
 
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+
+import java.util.List;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class HomeView extends JFrame {
 
     private static final long serialVersionUID = 1L;
+
     private JPanel contentPane;
-    
-    // Panel contenedor que usará el CardLayout para alternar entre ver y editar el perfil
+    private CardLayout cardLayout;
     private JPanel cardPanel;
-    
-    // Componente para mostrar la información del usuario en modo lectura
     private JTextArea userInfoArea;
-    
-    // Campos de texto interactivos para modificar los datos en modo edición
+    private JPanel workoutsListPanel;
     private JTextField tfFirstName, tfLastName, tfEmail, tfBirthDate;
-    
-    // Almacena el nivel actual del usuario (se mantiene en memoria al editar)
     private int currentLevel = 0;
 
-    // Variables para la integración con Firestore
     private final UserService userService = new UserService();
-    private String currentUserId; // Идентификатор текущего авторизованного пользователя
+    private final WorkoutService workoutService = new WorkoutService();
+
+    private String currentUserId;
+
+    // Modern GymApp color palette
+    private final Color BACKGROUND = new Color(243, 246, 252);
+    private final Color NAVY = new Color(25, 35, 58);
+    private final Color BLUE = new Color(55, 105, 220);
+    private final Color TEXT = new Color(45, 55, 72);
+    private final Color MUTED = new Color(115, 125, 145);
+    private final Color WHITE = Color.WHITE;
+    private final Color BORDER = new Color(220, 226, 237);
+    private final Color LIGHT_BLUE = new Color(232, 239, 255);
+
     /**
-     * Punto de entrada de la aplicación. Levanta la interfaz gráfica.
+     * Punto de entrada de la aplicación.
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     HomeView frame = new HomeView("test_uid_123");
-                    frame.setVisible(true); // Hace visible la ventana principal
-                    
-                    // Simulación inicial: Carga datos de prueba que vendrían de la base de datos
+                    frame.setVisible(true);
+
+                    // Datos de prueba originales
                     frame.updateUserData(
-                        "Ana", "Krol", "anna.krol@example.com", "8 de febrero de 2001, 12:00 AM", 0
+                        "Ana", "Krol",
+                        "anna.krol@example.com",
+                        "8 de febrero de 2001, 12:00 AM", 0
                     );
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -64,14 +91,15 @@ public class HomeView extends JFrame {
      * Create the frame.
      */
     public HomeView(String uid) {
-    	this.currentUserId = uid; //Gvardar id usuario logiado
-    	
+
+        this.currentUserId = uid;
+
+        setTitle("GymApp | Home");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 524, 615);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        contentPane.setLayout(null);
 
         JButton btnWorkouts = new JButton("Workouts");
         btnWorkouts.addActionListener(new ActionListener() {
@@ -100,151 +128,474 @@ public class HomeView extends JFrame {
         tfEmail = new JTextField();
         tfBirthDate = new JTextField();
 
-        fieldsPanel.add(new JLabel("firstName:"));
-        fieldsPanel.add(tfFirstName);
-        fieldsPanel.add(new JLabel("lastName:"));
-        fieldsPanel.add(tfLastName);
-        fieldsPanel.add(new JLabel("email:"));
-        fieldsPanel.add(tfEmail);
-        fieldsPanel.add(new JLabel("birthDate:"));
-        fieldsPanel.add(tfBirthDate);
-        editCard.add(fieldsPanel);
+        styleInput(tfFirstName);
+        styleInput(tfLastName);
+        styleInput(tfEmail);
+        styleInput(tfBirthDate);
 
-        // Panel de botones de control dentro del contenedor (CORREGIDO: Declaración e inicialización añadida)
-        JPanel actionButtonsPanel = new JPanel(new GridLayout(1, 2, 5, 5));
-        actionButtonsPanel.setBounds(0, 122, 300, 23);
-        
-        JButton btnSave = new JButton("Save");
+        fieldsPanel.add(createFieldLabel("Nombre"));
+        fieldsPanel.add(tfFirstName);
+
+        fieldsPanel.add(createFieldLabel("Apellidos"));
+        fieldsPanel.add(tfLastName);
+
+        fieldsPanel.add(createFieldLabel("Email"));
+        fieldsPanel.add(tfEmail);
+
+        fieldsPanel.add(createFieldLabel("Fecha de nacimiento"));
+        fieldsPanel.add(tfBirthDate);
+
+        editCard.add(fieldsPanel, BorderLayout.CENTER);
+
+        JPanel actionButtonsPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+        actionButtonsPanel.setBackground(WHITE);
+
+        JButton btnSave = createPrimaryButton("Guardar");
         btnSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Leemos los nuevos datos
+
+                // Lógica original: leer los nuevos datos
                 String newFirst = tfFirstName.getText();
                 String newLast = tfLastName.getText();
                 String newEmail = tfEmail.getText();
                 String newBirth = tfBirthDate.getText();
-                
-                // TODO: Vincular aquí la lógica de persistencia para enviar los datos a Firestore
-                
+
+                // TODO: Vincular aquí la persistencia con Firestore
+
                 // Actualizamos y volvemos atrás
-                updateUserData(newFirst, newLast, newEmail, newBirth, currentLevel);
+                updateUserData(
+                    newFirst, newLast, newEmail,
+                    newBirth, currentLevel
+                );
+
                 cardLayout.show(cardPanel, "VIEW_MODE");
             }
         });
 
-        JButton btnCancel = new JButton("Cancel");
+        JButton btnCancel = createSecondaryButton("Cancelar");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Simplemente volvemos atrás sin guardar los cambios
                 cardLayout.show(cardPanel, "VIEW_MODE");
             }
         });
 
         actionButtonsPanel.add(btnSave);
         actionButtonsPanel.add(btnCancel);
-        editCard.add(actionButtonsPanel);
-        
-        cardPanel.add(editCard);
-        
-                // Botón que actúa como disparador (trigger) para cambiar al formulario de edición
-                JButton btnEdit = new JButton("Edit Profile");
-                btnEdit.setBounds(0, 249, 427, 40);
-                cardPanel.add(btnEdit);
-                btnEdit.setFont(new Font("Arial", Font.PLAIN, 11));
-                btnEdit.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        // Al hacer clic, el CardLayout oculta la vista actual y despliega "EDIT_MODE"
-                        cardLayout.show(cardPanel, "EDIT_MODE");
-                    }
-                });
+        editCard.add(actionButtonsPanel, BorderLayout.SOUTH);
 
-        // ========================================================
-        // Botón: History Workouts (se desplazó hacia abajo porque la tarjeta ahora es más grande)
-        JButton btnHistory = new JButton("History Workouts");
-        btnHistory.setBounds(36, 416, 213, 58);
-        contentPane.add(btnHistory);
-        
-                // --------------------------------------------------------
-                // TARJETA 1: MODO VISTA ("VIEW_MODE") - Muestra datos y botón "Edit"
-                // --------------------------------------------------------
-                JPanel viewCard = new JPanel();
-                viewCard.setBounds(23, 69, 427, 250);
-                contentPane.add(viewCard);
-                viewCard.setLayout(null);
-                userInfoArea = new JTextArea();
-                userInfoArea.setBounds(0, 0, 300, 21);
-                userInfoArea.setEditable(false);
-                userInfoArea.setWrapStyleWord(true);
-                userInfoArea.setLineWrap(true);
-                userInfoArea.setOpaque(false);
-                userInfoArea.setBackground(new Color(0,0,0,0));
-                userInfoArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
-                viewCard.add(userInfoArea);
-                
-                JLabel lblNewLabel = new JLabel("GymApp");
-                lblNewLabel.setBounds(203, 21, 150, 31);
-                contentPane.add(lblNewLabel);
-     // Iniciamos la carga de BD los datos de usuario
+        cardPanel.add(editCard, "EDIT_MODE");
+
+        // WORKOUTS MODE
+        JPanel workoutsCard = new JPanel(new BorderLayout(10, 20));
+        workoutsCard.setBackground(WHITE);
+        workoutsCard.setBorder(new EmptyBorder(25, 25, 25, 25));
+
+        JLabel lblWorkoutsTitle = new JLabel("Workouts disponibles");
+        lblWorkoutsTitle.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        lblWorkoutsTitle.setForeground(NAVY);
+        workoutsCard.add(lblWorkoutsTitle, BorderLayout.NORTH);
+
+        workoutsListPanel = new JPanel();
+        workoutsListPanel.setLayout(
+                new BoxLayout(workoutsListPanel, BoxLayout.Y_AXIS)
+        );
+        workoutsListPanel.setBackground(BACKGROUND);
+        workoutsListPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        JScrollPane workoutsScrollPane = new JScrollPane(workoutsListPanel);
+        workoutsScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        workoutsScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        workoutsScrollPane.getViewport().setBackground(BACKGROUND);
+
+        workoutsCard.add(workoutsScrollPane, BorderLayout.CENTER);
+
+        JButton btnBackToProfile = createSecondaryButton("Volver al perfil");
+        btnBackToProfile.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "VIEW_MODE");
+            }
+        });
+
+        JPanel workoutsButtonPanel = new JPanel(new BorderLayout());
+        workoutsButtonPanel.setBackground(WHITE);
+        workoutsButtonPanel.add(btnBackToProfile, BorderLayout.EAST);
+        workoutsCard.add(workoutsButtonPanel, BorderLayout.SOUTH);
+
+        cardPanel.add(workoutsCard, "WORKOUTS_MODE");
+
+        mainPanel.setBorder(new EmptyBorder(5, 0, 5, 0));
+        contentPane.add(mainPanel, BorderLayout.CENTER);
+
+        // Initial view
+        cardLayout.show(cardPanel, "VIEW_MODE");
+
+        // Original Firestore loading
         loadUserData(uid);
     }
-    //Método para obtener datos a través de tu UserService
+
+    // Sidebar button styling
+    private JButton createSidebarButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        button.setForeground(WHITE);
+        button.setBackground(NAVY);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return button;
+    }
+
+    // Primary blue button
+    private JButton createPrimaryButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        button.setForeground(WHITE);
+        button.setBackground(BLUE);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setPreferredSize(new Dimension(140, 40));
+        return button;
+    }
+
+    // Secondary button
+    private JButton createSecondaryButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        button.setForeground(NAVY);
+        button.setBackground(LIGHT_BLUE);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return button;
+    }
+
+    // Input field styling
+    private void styleInput(JTextField field) {
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        field.setForeground(TEXT);
+        field.setBackground(WHITE);
+        field.setCaretColor(BLUE);
+        field.setPreferredSize(new Dimension(200, 36));
+        field.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(BORDER, 1),
+                new EmptyBorder(7, 9, 7, 9)
+        ));
+    }
+
+    // Form label styling
+    private JLabel createFieldLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        label.setForeground(TEXT);
+        return label;
+    }
+
+    // Original Firestore profile-loading method
     private void loadUserData(String uid) {
-    	// Iniciamos el flujo en segundo plano
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    // 1. Realizamos una solicitud asíncrona a Firestore a través de UserService
-                    // Metod .get() espera a que finalice la operación de red y devuelve DocumentSnapshot
-                    com.google.cloud.firestore.DocumentSnapshot document = userService.getUserProfileAsync(uid).get();
+                    com.google.cloud.firestore.DocumentSnapshot document =
+                            userService.getUserProfileAsync(uid).get();
 
-                    // 2. Revisa si existe el documento del usuario en la BD
                     if (document.exists()) {
-                        // Extraemos las cadenas comprobando si son nulas (por si acaso algún campo de la BD está vacío)
-                        final String firstName = document.getString("firstName") != null ? document.getString("firstName") : "";
-                        final String lastName = document.getString("lastName") != null ? document.getString("lastName") : "";
-                        final String email = document.getString("email") != null ? document.getString("email") : "";
-                        final String birthDate = document.getString("birthDate") != null ? document.getString("birthDate") : "";
-                        
-                        // Extraemos el valor como tipo «long», ya que Firestore almacena los números como «Long»
-                        Long levelLong = document.getLong("level");
-                        final int level = levelLong != null ? levelLong.intValue() : 0;
+                        final String firstName =
+                                document.getString("firstName") != null
+                                ? document.getString("firstName") : "";
 
-                        // 3. Actualizamos los elementos de la interfaz gráfica Swing estrictamente en el hilo EDT
+                        final String lastName =
+                                document.getString("lastName") != null
+                                ? document.getString("lastName") : "";
+
+                        final String email =
+                                document.getString("email") != null
+                                ? document.getString("email") : "";
+
+                        final String birthDate =
+                                document.getString("birthDate") != null
+                                ? document.getString("birthDate") : "";
+
+                        Long levelLong = document.getLong("level");
+                        final int level =
+                                levelLong != null ? levelLong.intValue() : 0;
+
                         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                updateUserData(firstName, lastName, email, birthDate, level);
+                                updateUserData(
+                                    firstName, lastName,
+                                    email, birthDate, level
+                                );
                             }
                         });
+
                     } else {
-                        System.err.println("Perfil de usuario con ID " + uid + "no existe en Firestore.");
-                        javax.swing.JOptionPane.showMessageDialog(HomeView.this, 
-                            "Error: No se ha encontrado el perfil de usuario.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        System.err.println(
+                            "Perfil de usuario con ID " + uid
+                            + " no existe en Firestore."
+                        );
+
+                        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                JOptionPane.showMessageDialog(
+                                    HomeView.this,
+                                    "Error: No se ha encontrado el perfil de usuario.",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                                );
+                            }
+                        });
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    // En caso de que se produzca un error de red o de Firestore, mostramos una notificación al usuario.
+
+                    final String errorMessage = e.getMessage();
+
                     javax.swing.SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            javax.swing.JOptionPane.showMessageDialog(HomeView.this, 
-                                "No se han podido cargar los datos del perfil: " + e.getMessage(), 
-                                "Error de conexión", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                HomeView.this,
+                                "No se han podido cargar los datos del perfil: "
+                                + errorMessage,
+                                "Error de conexión",
+                                JOptionPane.ERROR_MESSAGE
+                            );
                         }
                     });
                 }
             }
         }).start();
     }
-    
 
     /**
-     * Método para la actualización dinámica de datos
+     * Método original para actualizar los datos.
      */
-    public void updateUserData(String firstName, String lastName, String email, String birthDate, int level) {
+    private void loadAvailableWorkouts() {
+
+        workoutsListPanel.removeAll();
+
+        JLabel loadingLabel = new JLabel("Cargando workouts...");
+        loadingLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        loadingLabel.setForeground(MUTED);
+        loadingLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+
+        workoutsListPanel.add(loadingLabel);
+        workoutsListPanel.revalidate();
+        workoutsListPanel.repaint();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<QueryDocumentSnapshot> workouts =
+                            workoutService.getAvailableWorkouts(currentUserId);
+
+                    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            workoutsListPanel.removeAll();
+
+                            if (workouts.isEmpty()) {
+                                JLabel emptyLabel = new JLabel(
+                                        "No hay workouts disponibles para tu nivel."
+                                );
+                                emptyLabel.setFont(
+                                        new Font("Segoe UI", Font.PLAIN, 14)
+                                );
+                                emptyLabel.setForeground(MUTED);
+                                workoutsListPanel.add(emptyLabel);
+                            } else {
+                                for (QueryDocumentSnapshot workout : workouts) {
+                                    String name = workout.getString("nombre");
+
+                                    if (name == null || name.isBlank()) {
+                                        name = workout.getId();
+                                    }
+
+                                    Long levelValue = workout.getLong("nivel");
+                                    int level = levelValue != null
+                                            ? levelValue.intValue() : 0;
+
+                                    String description =
+                                            workout.getString("descripcion");
+
+                                    String video = workout.getString("video");
+
+                                    JPanel workoutCard = createWorkoutCard(
+                                            name,
+                                            level,
+                                            description,
+                                            video
+                                    );
+
+                                    workoutsListPanel.add(workoutCard);
+                                    workoutsListPanel.add(
+                                            Box.createVerticalStrut(12)
+                                    );
+                                }
+                            }
+
+                            workoutsListPanel.revalidate();
+                            workoutsListPanel.repaint();
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    final String errorMessage = e.getMessage();
+
+                    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            workoutsListPanel.removeAll();
+
+                            JLabel errorLabel = new JLabel(
+                                    "<html>No se han podido cargar los workouts.<br>"
+                                    + errorMessage + "</html>"
+                            );
+                            errorLabel.setForeground(Color.RED);
+                            errorLabel.setFont(
+                                    new Font("Segoe UI", Font.PLAIN, 14)
+                            );
+
+                            workoutsListPanel.add(errorLabel);
+                            workoutsListPanel.revalidate();
+                            workoutsListPanel.repaint();
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+    private JPanel createWorkoutCard(
+            String name,
+            int level,
+            String description,
+            String video) {
+
+        JPanel card = new JPanel(new BorderLayout(15, 10));
+        card.setBackground(WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(BORDER, 1),
+                new EmptyBorder(16, 16, 16, 16)
+        ));
+
+        card.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
+        card.setPreferredSize(new Dimension(450, 135));
+
+        JPanel informationPanel = new JPanel();
+        informationPanel.setLayout(
+                new BoxLayout(informationPanel, BoxLayout.Y_AXIS)
+        );
+        informationPanel.setBackground(WHITE);
+
+        JLabel nameLabel = new JLabel(name);
+        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        nameLabel.setForeground(NAVY);
+        nameLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+
+        JLabel levelLabel = new JLabel("Nivel " + level);
+        levelLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        levelLabel.setForeground(BLUE);
+        levelLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+
+        String safeDescription =
+                description != null && !description.isBlank()
+                ? description : "Sin descripción disponible.";
+
+        JLabel descriptionLabel = new JLabel(
+                "<html><div style='width:260px;'>"
+                + safeDescription
+                + "</div></html>"
+        );
+        descriptionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        descriptionLabel.setForeground(TEXT);
+        descriptionLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+
+        informationPanel.add(nameLabel);
+        informationPanel.add(Box.createVerticalStrut(5));
+        informationPanel.add(levelLabel);
+        informationPanel.add(Box.createVerticalStrut(8));
+        informationPanel.add(descriptionLabel);
+
+        JButton btnStart = createPrimaryButton("START");
+        btnStart.setPreferredSize(new Dimension(100, 40));
+
+        if (video == null || video.isBlank()) {
+            btnStart.setEnabled(false);
+            btnStart.setToolTipText(
+                    "Este workout no tiene un vídeo disponible."
+            );
+        } else {
+            btnStart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        URI videoUri = new URI(video);
+
+                        if (!"https".equalsIgnoreCase(videoUri.getScheme())
+                                && !"http".equalsIgnoreCase(videoUri.getScheme())) {
+                            throw new IllegalArgumentException(
+                                    "La URL del vídeo no es válida."
+                            );
+                        }
+
+                        if (Desktop.isDesktopSupported()
+                                && Desktop.getDesktop().isSupported(
+                                        Desktop.Action.BROWSE)) {
+                            Desktop.getDesktop().browse(videoUri);
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                    HomeView.this,
+                                    "No se puede abrir el navegador en este equipo.",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(
+                                HomeView.this,
+                                "No se ha podido abrir el vídeo:\n"
+                                + ex.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                }
+            });
+        }
+
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        buttonPanel.setBackground(WHITE);
+        buttonPanel.add(btnStart, BorderLayout.CENTER);
+
+        card.add(informationPanel, BorderLayout.CENTER);
+        card.add(buttonPanel, BorderLayout.EAST);
+
+        return card;
+    }
+
+    public void updateUserData(
+            String firstName,
+            String lastName,
+            String email,
+            String birthDate,
+            int level) {
+
         this.currentLevel = level;
-        
+
         // Sincronizamos los campos de entrada de texto
         tfFirstName.setText(firstName);
         tfLastName.setText(lastName);
@@ -253,11 +604,13 @@ public class HomeView extends JFrame {
 
         // Sincronizamos la descripción textual en modo lectura
         StringBuilder sb = new StringBuilder();
-        sb.append("firstName: \"").append(firstName).append("\"\n");
-        sb.append("lastName: \"").append(lastName).append("\"\n");
-        sb.append("email: \"").append(email).append("\"\n");
-        sb.append("birthDate: ").append(birthDate).append("\n");
-        sb.append("level: ").append(level);
+
+        sb.append("Nombre: \"").append(firstName).append("\"\n");
+        sb.append("Apellidos: \"").append(lastName).append("\"\n");
+        sb.append("Email: \"").append(email).append("\"\n");
+        sb.append("Nacimiento: ").append(birthDate).append("\n");
+        sb.append("Nivel: ").append(level);
+
         userInfoArea.setText(sb.toString());
     }
 }
