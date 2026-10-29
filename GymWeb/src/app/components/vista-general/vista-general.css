@@ -127,3 +127,24 @@ background-color: #7f97e7;
   padding: 2.5rem;
   text-align: center;
 }
+
+
+/*RESPONSIVE PARA MOVIL*/
+@media (max-width: 768px) {
+  .filtrador, .busqueda, .contenedor-Workouts {
+    width: 90%;
+  }
+
+  .contenedor-Workouts {
+    flex-direction: column; 
+  }
+
+  .listaWorkouts {
+    width: 100%;
+  }
+}
+
+a:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 3px solid #2563eb;
+}
+
