@@ -97,3 +97,27 @@ td.foto img {
   border: 2px solid #94a3b8;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+
+
+/*responsive para movil*/
+@media (max-width: 768px) {
+  table {
+    width: 95%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /*NO DEFORMA LAS FOTOS*/
+  td.foto img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+  }
+}
+
+*:focus-visible {
+  outline: 3px solid #2563eb;
+}
+
