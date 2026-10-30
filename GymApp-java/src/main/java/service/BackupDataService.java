@@ -1,42 +1,78 @@
 package service;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-
-import model.Exercise;
-import model.Serie;
+import dao.WorkoutDAO;
 import model.Workout;
-import service.DBconnect;
 
-public class BackupDat{
+
+public class BackupDataService{
 	
-	//	PARA EL MAPEO DE LA BD EN FIREBASE
-	public List<Workout> obtenerWorkouts() throws Exception{
-		//	leo los workouts
-		QuerySnapshot workoutsSnapshot = DBconnect.getFirestore().collection("workouts").get().get();
-		
-		for(QueryDocumentSnapshot docWorkout: workoutsSnapshot){
-			Workout workout = docWorkout.toObject(Workout.class);
-			String idWorkout = docWorkout.getId();
-			
-		}
-		
-		QuerySnapshot exerciseSnapshot = DBconnect.getFirestore().collection("exercises").get().get();
-		
-		for(QueryDocumentSnapshot docExercise: exerciseSnapshot) {
-			Exercise exercise = docExercise.toObject(Exercise.class);
-			String idExercise = docExercise.getId();
-		}
-		
-		QuerySnapshot serieSnapshot = DBconnect.getFirestore().collection("series").get().get();
-		
-		for(QueryDocumentSnapshot docSerie: serieSnapshot) {
-			Serie serie = docSerie.toObject(Serie.class);
-			String idSerie = docSerie.getId();
-		}
+	private final WorkoutDAO workoutDAO;
+
+
+	/*
+     * TODO: INTEGRACIÓN FUTURA DE USUARIOS
+     *
+     * Se incorporará una dependencia para recuperar
+     * la información de usuarios.
+     *
+     * Tipo previsto:
+     *
+     * private final UserDAO userDAO;
+     *
+     * O la clase de acceso a datos que finalmente
+     * se acuerde con el equipo.
+     */
+	
+	public BackupDataService(WorkoutDAO workoutDAO) {
+		this.workoutDAO= workoutDAO;
+		 /*
+         * TODO: INTEGRACIÓN FUTURA DE USUARIOS
+         *
+         * Se incorporará la dependencia correspondiente
+         * al constructor cuando se defina su implementación.
+         */
 	}
 	
+	public Map<String, Workout> obtenerWorkoutsBackup() throws IOException,
+												InterruptedException, ExecutionException{
+		
+		Map<String, Workout> workoutsBackup= new HashMap<>();
+		List<Workout> workouts = workoutDAO.obtenerTodosCompleto();	
+		
+		// verifico que no haya workouts nulos
+		if (workouts == null) {
+			throw new IllegalStateException("No se pudieron cargar los workouts");
+		}
+		
+		for (Workout workout : workouts) {
+
+		    if (workout == null ||
+		        workout.getId() == null ||
+		        workout.getId().isBlank()) {
+
+		        throw new IllegalStateException(
+		            "Se encontró un workout sin identificador válido"
+		        );
+		    }
+
+		    String id = workout.getId();
+
+		    if (workoutsBackup.putIfAbsent(id, workout) != null) {
+
+		        throw new IllegalStateException(
+		            "Identificador de workout duplicado: " + id
+		        );
+		    }
+		}
+		return workoutsBackup;
+		
+				
+	}
 
 }
