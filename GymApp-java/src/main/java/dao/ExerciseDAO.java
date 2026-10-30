@@ -33,7 +33,7 @@ public class ExerciseDAO {
 	public List<Exercise> obtenerPorWorkout(String workoutId) throws InterruptedException, ExecutionException, IOException{
 		
 		QuerySnapshot resultado = DBconnect.getFirestore()
-											.collection("workouts").document(workoutId).collection("exercise").get().get();
+											.collection("workouts").document(workoutId).collection("exercises").get().get();
 		
 		List<Exercise> ejercicios = new ArrayList<>();
 		
