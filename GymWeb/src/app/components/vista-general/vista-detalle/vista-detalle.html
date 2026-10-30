@@ -6,6 +6,8 @@
 
     </header>
 
+    <h1>{{rutinaSeleccionada().nombre}}</h1>
+
     @if (rutinaSeleccionada()) {
         <table border="2">
             <thead>
@@ -21,7 +23,7 @@
                 @for (ejercicio of rutinaSeleccionada().ejercicios; track ejercicio.nombre) {
                     <tr>
                         <td>{{ ejercicio.nombre | uppercase | slice:0:30 }}</td>
-                        <td class="foto"><img src="https://i.pinimg.com/564x/eb/e0/47/ebe047eb4f075ee915dac462e1a46556.jpg" alt="ejercicio"></td>
+                        <td class="foto"><img src="{{ejercicio.imagen}}" alt="ejercicio"></td>
                         <td>{{ejercicio.descripcion}}</td>
                         <td>{{funcionDuracionEjercicio(ejercicio.descanso, ejercicio.series[0].duracion, ejercicio.series.length) | formatoDuracion}}</td>
                     </tr>

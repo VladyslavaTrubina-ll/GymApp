@@ -1,446 +1,89 @@
 {
   "workouts": [
     {
-      "nombre": "Movilidad matinal",
-      "descripcion": "Rutina suave para activar articulaciones al empezar el día.",
+      "id": 1,
+      "nombre": "Adaptación Inicial A",
+      "descripcion": "Rutina suave de movilidad y activación muscular para el primer día.",
       "nivel": 0,
-      "video": "https://www.youtube.com/watch?v=mov001",
+      "imagen": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200",
       "ejercicios": [
         {
-          "nombre": "Círculos de cadera",
-          "descripcion": "Gira la cadera en círculos amplios.",
-          "descanso": 15,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/circulos_de_cadera_1.jpg",
-              "repeticiones": 10,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/circulos_de_cadera_2.jpg",
-              "repeticiones": 10,
-              "duracion": 30
-            }
-          ]
-        },
-        {
-          "nombre": "Rotación de hombros",
-          "descripcion": "Hombros hacia atrás con el brazo extendido.",
-          "descanso": 15,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/rotacion_de_hombros_1.jpg",
-              "repeticiones": 12,
-              "duracion": 25
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/rotacion_de_hombros_2.jpg",
-              "repeticiones": 12,
-              "duracion": 25
-            }
-          ]
-        },
-        {
-          "nombre": "Gato-vaca",
-          "descripcion": "Alterna la espalda arqueada y redondeada.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/gato-vaca_1.jpg",
-              "repeticiones": 8,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/gato-vaca_2.jpg",
-              "repeticiones": 8,
-              "duracion": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Estiramientos suaves",
-      "descripcion": "Estiramientos globales para terminar el día.",
-      "nivel": 0,
-      "video": "https://www.youtube.com/watch?v=est002",
-      "ejercicios": [
-        {
-          "nombre": "Estiramiento de isquios",
-          "descripcion": "Sentado, inclínate hacia los pies.",
-          "descanso": 15,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/estiramiento_de_isquios_1.jpg",
-              "repeticiones": 1,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/estiramiento_de_isquios_2.jpg",
-              "repeticiones": 1,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Estiramiento de pecho",
-          "descripcion": "Brazos atrás con las manos entrelazadas.",
-          "descanso": 10,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/estiramiento_de_pecho_1.jpg",
-              "repeticiones": 1,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/estiramiento_de_pecho_2.jpg",
-              "repeticiones": 1,
-              "duracion": 30
-            }
-          ]
-        },
-        {
-          "nombre": "Postura del niño",
-          "descripcion": "Sentado sobre los talones, brazos al frente.",
-          "descanso": 10,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/postura_del_nino_1.jpg",
-              "repeticiones": 1,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/postura_del_nino_2.jpg",
-              "repeticiones": 1,
-              "duracion": 45
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Caminata activa",
-      "descripcion": "Marcha en el sitio con cambios de ritmo.",
-      "nivel": 0,
-      "video": "https://www.youtube.com/watch?v=cam003",
-      "ejercicios": [
-        {
-          "nombre": "Marcha en el sitio",
-          "descripcion": "Eleva las rodillas a ritmo moderado.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/marcha_en_el_sitio_1.jpg",
-              "repeticiones": 60,
-              "duracion": 60
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/marcha_en_el_sitio_2.jpg",
-              "repeticiones": 60,
-              "duracion": 60
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/marcha_en_el_sitio_3.jpg",
-              "repeticiones": 60,
-              "duracion": 60
-            }
-          ]
-        },
-        {
-          "nombre": "Marcha con brazos",
-          "descripcion": "Marcha coordinando brazos arriba.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/marcha_con_brazos_1.jpg",
-              "repeticiones": 40,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/marcha_con_brazos_2.jpg",
-              "repeticiones": 40,
-              "duracion": 45
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Sesión de Pilates Core",
-      "descripcion": "Trabajo de zona media con control de la respiración.",
-      "nivel": 1,
-      "video": "https://www.youtube.com/watch?v=pil101",
-      "ejercicios": [
-        {
-          "nombre": "Plancha abdominal",
-          "descripcion": "Mantén el cuerpo recto apoyado en antebrazos.",
+          "nombre": "Movilidad Articular",
+          "descripcion": "Rotaciones suaves de tobillos, rodillas y hombros.",
           "descanso": 30,
+          "imagen": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/plancha_abdominal_1.jpg",
               "repeticiones": 1,
-              "duracion": 52
+              "duracion": 90
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/plancha_abdominal_2.jpg",
               "repeticiones": 1,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/plancha_abdominal_3.jpg",
-              "repeticiones": 1,
-              "duracion": 40
+              "duracion": 90
             }
           ]
         },
         {
-          "nombre": "Puente de glúteos",
-          "descripcion": "Eleva la cadera manteniendo la espalda alineada.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/puente_de_gluteos_1.jpg",
-              "repeticiones": 12,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/puente_de_gluteos_2.jpg",
-              "repeticiones": 12,
-              "duracion": 25
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Cardio suave",
-      "descripcion": "Cardio de bajo impacto para ganar resistencia.",
-      "nivel": 1,
-      "video": "https://www.youtube.com/watch?v=car102",
-      "ejercicios": [
-        {
-          "nombre": "Paso lateral",
-          "descripcion": "Desplázate de lado a lado con flexión de rodillas.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/paso_lateral_1.jpg",
-              "repeticiones": 30,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/paso_lateral_2.jpg",
-              "repeticiones": 30,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/paso_lateral_3.jpg",
-              "repeticiones": 30,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Talones al glúteo",
-          "descripcion": "Lleva los talones hacia atrás alternando.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/talones_al_gluteo_1.jpg",
-              "repeticiones": 30,
-              "duracion": 35
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/talones_al_gluteo_2.jpg",
-              "repeticiones": 30,
-              "duracion": 35
-            }
-          ]
-        },
-        {
-          "nombre": "Escaladores lentos",
-          "descripcion": "Rodillas al pecho en posición de plancha.",
-          "descanso": 25,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/escaladores_lentos_1.jpg",
-              "repeticiones": 20,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/escaladores_lentos_2.jpg",
-              "repeticiones": 20,
-              "duracion": 30
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Yoga flow",
-      "descripcion": "Secuencia fluida de posturas básicas.",
-      "nivel": 1,
-      "video": "https://www.youtube.com/watch?v=yog103",
-      "ejercicios": [
-        {
-          "nombre": "Saludo al sol",
-          "descripcion": "Secuencia completa enlazada.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/saludo_al_sol_1.jpg",
-              "repeticiones": 5,
-              "duracion": 60
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/saludo_al_sol_2.jpg",
-              "repeticiones": 5,
-              "duracion": 60
-            }
-          ]
-        },
-        {
-          "nombre": "Guerrero II",
-          "descripcion": "Mantén la postura con las rodillas firmes.",
-          "descanso": 15,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/guerrero_ii_1.jpg",
-              "repeticiones": 1,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/guerrero_ii_2.jpg",
-              "repeticiones": 1,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Perro boca abajo",
-          "descripcion": "Empuja el suelo con las manos.",
-          "descanso": 15,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/perro_boca_abajo_1.jpg",
-              "repeticiones": 1,
-              "duracion": 35
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/perro_boca_abajo_2.jpg",
-              "repeticiones": 1,
-              "duracion": 35
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/perro_boca_abajo_3.jpg",
-              "repeticiones": 1,
-              "duracion": 35
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Fuerza de piernas",
-      "descripcion": "Sentadillas y zancadas para tren inferior.",
-      "nivel": 2,
-      "video": "https://www.youtube.com/watch?v=pie201",
-      "ejercicios": [
-        {
-          "nombre": "Sentadilla",
-          "descripcion": "Baja hasta 90° con la espalda recta.",
-          "descanso": 40,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/sentadilla_1.jpg",
-              "repeticiones": 15,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/sentadilla_2.jpg",
-              "repeticiones": 15,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/sentadilla_3.jpg",
-              "repeticiones": 12,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Zancada alterna",
-          "descripcion": "Alterna las piernas dando un paso largo.",
+          "nombre": "Caminata Suave",
+          "descripcion": "Caminata continua a ritmo relajado.",
           "descanso": 30,
+          "imagen": "https://www.infobae.com/resizer/v2/GBFK4YPRPJBYHKS4GDGYEKVNWA.jpg?auth=0bf7ca6886d2e41d32abfd1197df70079158342107149285ddffe6c2fc93bcbc&smart=true&width=1200&height=900&quality=85",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/zancada_alterna_1.jpg",
-              "repeticiones": 10,
-              "duracion": 40
+              "repeticiones": 1,
+              "duracion": 150
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/zancada_alterna_2.jpg",
-              "repeticiones": 10,
-              "duracion": 40
+              "repeticiones": 1,
+              "duracion": 150
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Iniciación al Movimiento",
+      "descripcion": "Ejercicios básicos para adaptar articulaciones y postura.",
+      "nivel": 0,
+      "imagen": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Estiramiento Dinámico",
+          "descripcion": "Estiramientos suaves en movimiento.",
+          "descanso": 30,
+          "imagen": "https://images.squarespace-cdn.com/content/v1/5ebef943272c1041d83b1d15/d783f14f-45fd-423f-948e-8ab54b022af6/Estiramientos+Dinamicos.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 1,
+              "duracion": 120
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 1,
+              "duracion": 120
             }
           ]
         },
         {
-          "nombre": "Elevación de talones",
-          "descripcion": "De pie, sube y baja sobre las puntas.",
-          "descanso": 25,
+          "nombre": "Puente de Glúteo Suave",
+          "descripcion": "Elevaciones de cadera tumbado en el suelo.",
+          "descanso": 30,
+          "imagen": "https://images.squarespace-cdn.com/content/v1/5ebef943272c1041d83b1d15/1707626699721-K29HYDPVK31MYBF4UZZN/Puente+de+Glu%CC%81teo.jpeg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/elevacion_de_talones_1.jpg",
-              "repeticiones": 20,
+              "repeticiones": 8,
               "duracion": 30
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/elevacion_de_talones_2.jpg",
-              "repeticiones": 20,
+              "repeticiones": 8,
               "duracion": 30
             }
           ]
@@ -448,69 +91,106 @@
       ]
     },
     {
-      "nombre": "Tren superior",
-      "descripcion": "Flexiones y remos para pecho, espalda y brazos.",
-      "nivel": 2,
-      "video": "https://www.youtube.com/watch?v=sup202",
+      "id": 3,
+      "nombre": "Recuperación Activa Nivel 0",
+      "descripcion": "Sesión ultra ligera pensada para principiantes absolutos.",
+      "nivel": 0,
+      "imagen": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200",
       "ejercicios": [
+        {
+          "nombre": "Respiración Diafragmática",
+          "descripcion": "Ejercicios de respiración y relajación.",
+          "descanso": 15,
+          "imagen": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 1,
+              "duracion": 90
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 1,
+              "duracion": 90
+            }
+          ]
+        },
+        {
+          "nombre": "Inclinaciones de Tronco",
+          "descripcion": "Flexiones suaves de columna de pie.",
+          "descanso": 30,
+          "imagen": "https://www.shutterstock.com/shutterstock/photos/2316630649/display_1500/stock-vector-man-doing-seated-side-leans-or-chair-leans-exercise-flat-vector-illustration-isolated-on-white-2316630649.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 10,
+              "duracion": 20
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 10,
+              "duracion": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Full Body Beginner",
+      "descripcion": "Rutina completa para principiantes que trabaja todo el cuerpo.",
+      "nivel": 1,
+      "imagen": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&utm_source=chatgpt.com",
+      "ejercicios": [
+        {
+          "nombre": "Calentamiento",
+          "descripcion": "Ejercicios de movilidad articular y cardio ligero.",
+          "descanso": 45,
+          "imagen": "https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=1200",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 1,
+              "duracion": 50
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 1,
+              "duracion": 50
+            }
+          ]
+        },
+        {
+          "nombre": "Sentadillas",
+          "descripcion": "Sentadillas básicas con peso corporal.",
+          "descanso": 45,
+          "imagen": "https://previews.123rf.com/images/artinspiring/artinspiring1903/artinspiring190300885/119488342-man-making-squats-exercise-for-butt-leg-workout.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 12,
+              "duracion": 45
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 12,
+              "duracion": 45
+            }
+          ]
+        },
         {
           "nombre": "Flexiones",
-          "descripcion": "Cuerpo recto, baja el pecho al suelo.",
-          "descanso": 40,
+          "descripcion": "Flexiones de pecho en el suelo.",
+          "descanso": 45,
+          "imagen": "https://cdn.shopify.com/s/files/1/0269/5551/3900/files/Push-Ups_600x600.png?v=1640121436",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/flexiones_1.jpg",
-              "repeticiones": 10,
-              "duracion": 35
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/flexiones_2.jpg",
-              "repeticiones": 10,
-              "duracion": 35
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/flexiones_3.jpg",
-              "repeticiones": 8,
-              "duracion": 30
-            }
-          ]
-        },
-        {
-          "nombre": "Remo con mochila",
-          "descripcion": "Tira de la mochila hacia la cadera.",
-          "descanso": 35,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/remo_con_mochila_1.jpg",
-              "repeticiones": 12,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/remo_con_mochila_2.jpg",
-              "repeticiones": 12,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Fondos de tríceps",
-          "descripcion": "Apoyado en una silla, baja y sube.",
-          "descanso": 30,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/fondos_de_triceps_1.jpg",
               "repeticiones": 10,
               "duracion": 30
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/fondos_de_triceps_2.jpg",
               "repeticiones": 10,
               "duracion": 30
             }
@@ -519,69 +199,88 @@
       ]
     },
     {
-      "nombre": "Core avanzado",
-      "descripcion": "Plancha dinámica y abdominales con control.",
-      "nivel": 2,
-      "video": "https://www.youtube.com/watch?v=cor203",
+      "id": 5,
+      "nombre": "Yoga Flow",
+      "descripcion": "Sesión de yoga para flexibilidad y relajación.",
+      "nivel": 1,
+      "imagen": "https://www.yogaenred.com/wp-content/uploads/2022/03/saludo-al-sol.jpg",
       "ejercicios": [
         {
-          "nombre": "Plancha lateral",
-          "descripcion": "Apoya un antebrazo y eleva la cadera.",
-          "descanso": 30,
+          "nombre": "Guerrero I",
+          "descripcion": "Postura del guerrero I.",
+          "descanso": 15,
+          "imagen": "https://xuanlanyoga.com/wp-content/uploads/2022/04/guerrero-1-1200x900.jpg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/plancha_lateral_1.jpg",
               "repeticiones": 1,
-              "duracion": 40
+              "duracion": 60
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/plancha_lateral_2.jpg",
               "repeticiones": 1,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/plancha_lateral_3.jpg",
-              "repeticiones": 1,
-              "duracion": 35
+              "duracion": 60
             }
           ]
         },
         {
-          "nombre": "Bicicleta abdominal",
-          "descripcion": "Codo a rodilla contraria.",
-          "descanso": 25,
+          "nombre": "Saludo al Sol",
+          "descripcion": "Secuencia clásica de yoga.",
+          "descanso": 15,
+          "imagen": "https://www.yogaenred.com/wp-content/uploads/2022/03/saludo-al-sol.jpg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/bicicleta_abdominal_1.jpg",
-              "repeticiones": 20,
+              "repeticiones": 1,
+              "duracion": 90
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 1,
+              "duracion": 90
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Tonificación Ligera",
+      "descripcion": "Trabajo de resistencia muscular para dar los primeros pasos.",
+      "nivel": 1,
+      "imagen": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Zancadas Estáticas",
+          "descripcion": "Zancadas fijas manteniendo la postura.",
+          "descanso": 45,
+          "imagen": "https://enfaf.com/wp-content/uploads/2026/10/zancadas-mancuernas-estatica.webp",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 10,
               "duracion": 40
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/bicicleta_abdominal_2.jpg",
-              "repeticiones": 20,
+              "repeticiones": 10,
               "duracion": 40
             }
           ]
         },
         {
-          "nombre": "Superman",
-          "descripcion": "Eleva brazos y piernas tumbado boca abajo.",
-          "descanso": 20,
+          "nombre": "Elevaciones Laterales",
+          "descripcion": "Hombros con mancuernas muy ligeras.",
+          "descanso": 45,
+          "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTje_AjYQaMDKJPWN32fld9y4NO0bUQ9vpDLbjI3UaIQ&s=10",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/superman_1.jpg",
               "repeticiones": 12,
               "duracion": 30
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/superman_2.jpg",
               "repeticiones": 12,
               "duracion": 30
             }
@@ -590,248 +289,106 @@
       ]
     },
     {
-      "nombre": "HIIT Express",
-      "descripcion": "Intervalos de alta intensidad en poco tiempo.",
-      "nivel": 3,
-      "video": "https://www.youtube.com/watch?v=hit301",
+      "id": 7,
+      "nombre": "Cardio HIIT",
+      "descripcion": "Entrenamiento intenso de cardio con intervalos de alta intensidad.",
+      "nivel": 2,
+      "imagen": "https://www.shutterstock.com/image-vector/collection-strength-calisthenics-exercises-that-260nw-1721777518.jpg",
       "ejercicios": [
         {
           "nombre": "Burpees",
-          "descripcion": "Salto, flexión y vuelta a la posición inicial.",
+          "descripcion": "Burpees completos a máxima velocidad.",
           "descanso": 30,
+          "imagen": "https://s1.ppllstatics.com/rc/www/multimedia/2024/07/18/burpees-kmd-U2207519490078OH-1200x840@RC.jpeg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/burpees_1.jpg",
-              "repeticiones": 10,
+              "repeticiones": 15,
+              "duracion": 30
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 15,
+              "duracion": 30
+            }
+          ]
+        },
+        {
+          "nombre": "Mountain Climbers",
+          "descripcion": "Escaladores rápidos en posición de plancha.",
+          "descanso": 30,
+          "imagen": "https://images.squarespace-cdn.com/content/v1/55b7f4ffe4b0a286c4c3499e/16b4e8f3-8766-418d-beeb-00addce2a3b9/how-to-do-mountain-climbers",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 20,
               "duracion": 40
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/burpees_2.jpg",
-              "repeticiones": 10,
+              "repeticiones": 20,
               "duracion": 40
-            },
+            }
+          ]
+        },
+        {
+          "nombre": "Jump Squats",
+          "descripcion": "Sentadillas con salto explosivo.",
+          "descanso": 30,
+          "imagen": "https://www.shutterstock.com/image-vector/exercise-guide-by-woman-doing-260nw-1275616618.jpg",
+          "series": [
             {
-              "nombre": "Serie 3",
-              "foto": "img/burpees_3.jpg",
-              "repeticiones": 8,
+              "nombre": "Serie 1",
+              "repeticiones": 12,
               "duracion": 35
-            }
-          ]
-        },
-        {
-          "nombre": "Mountain climbers",
-          "descripcion": "Lleva las rodillas al pecho alternando.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/mountain_climbers_1.jpg",
-              "repeticiones": 30,
-              "duracion": 30
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/mountain_climbers_2.jpg",
-              "repeticiones": 30,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/mountain_climbers_3.jpg",
-              "repeticiones": 30,
-              "duracion": 30
-            }
-          ]
-        },
-        {
-          "nombre": "Saltos de tijera",
-          "descripcion": "Salta abriendo y cerrando piernas y brazos.",
-          "descanso": 20,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/saltos_de_tijera_1.jpg",
-              "repeticiones": 40,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/saltos_de_tijera_2.jpg",
-              "repeticiones": 40,
-              "duracion": 30
+              "repeticiones": 12,
+              "duracion": 35
             }
           ]
         }
       ]
     },
     {
-      "nombre": "Cardio intenso",
-      "descripcion": "Series largas de cardio a alta intensidad.",
-      "nivel": 3,
-      "video": "https://www.youtube.com/watch?v=car302",
+      "id": 8,
+      "nombre": "Core Crusher",
+      "descripcion": "Entrenamiento específico de abdominales y core.",
+      "nivel": 2,
+      "imagen": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=80&utm_source=chatgpt.com",
       "ejercicios": [
         {
-          "nombre": "Saltos de cuerda",
-          "descripcion": "Salta con una cuerda imaginaria.",
+          "nombre": "Plancha",
+          "descripcion": "Plancha abdominal isométrica.",
           "descanso": 30,
+          "imagen": "https://www.sportlife.es/uploads/s1/76/33/69/8/article-como-conseguir-plancha-abdominal-perfecta-clave-alineacion-590b47c50eeff.jpeg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/saltos_de_cuerda_1.jpg",
-              "repeticiones": 80,
+              "repeticiones": 1,
               "duracion": 60
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/saltos_de_cuerda_2.jpg",
-              "repeticiones": 80,
-              "duracion": 60
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/saltos_de_cuerda_3.jpg",
-              "repeticiones": 80,
+              "repeticiones": 1,
               "duracion": 60
             }
           ]
         },
         {
-          "nombre": "Sprint en el sitio",
-          "descripcion": "Corre en el sitio a máxima velocidad.",
+          "nombre": "Crunches",
+          "descripcion": "Abdominales tradicionales.",
           "descanso": 30,
+          "imagen": "https://hips.hearstapps.com/hmg-prod/images/crunch-1588842220.jpg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/sprint_en_el_sitio_1.jpg",
-              "repeticiones": 1,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/sprint_en_el_sitio_2.jpg",
-              "repeticiones": 1,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/sprint_en_el_sitio_3.jpg",
-              "repeticiones": 1,
-              "duracion": 30
-            },
-            {
-              "nombre": "Serie 4",
-              "foto": "img/sprint_en_el_sitio_4.jpg",
-              "repeticiones": 1,
-              "duracion": 30
-            }
-          ]
-        },
-        {
-          "nombre": "Rodillas altas",
-          "descripcion": "Eleva las rodillas a la altura de la cadera.",
-          "descanso": 25,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/rodillas_altas_1.jpg",
-              "repeticiones": 50,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/rodillas_altas_2.jpg",
-              "repeticiones": 50,
-              "duracion": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "nombre": "Fuerza completa",
-      "descripcion": "Circuito de cuerpo entero con peso corporal.",
-      "nivel": 3,
-      "video": "https://www.youtube.com/watch?v=fue303",
-      "ejercicios": [
-        {
-          "nombre": "Sentadilla con salto",
-          "descripcion": "Sentadilla explosiva con salto.",
-          "descanso": 40,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/sentadilla_con_salto_1.jpg",
-              "repeticiones": 12,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/sentadilla_con_salto_2.jpg",
-              "repeticiones": 12,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/sentadilla_con_salto_3.jpg",
-              "repeticiones": 10,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Flexiones diamante",
-          "descripcion": "Manos juntas bajo el pecho.",
-          "descanso": 40,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/flexiones_diamante_1.jpg",
-              "repeticiones": 8,
-              "duracion": 35
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/flexiones_diamante_2.jpg",
-              "repeticiones": 8,
-              "duracion": 35
-            }
-          ]
-        },
-        {
-          "nombre": "Zancada con salto",
-          "descripcion": "Cambio de pierna en el aire.",
-          "descanso": 35,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/zancada_con_salto_1.jpg",
-              "repeticiones": 10,
-              "duracion": 40
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/zancada_con_salto_2.jpg",
-              "repeticiones": 10,
-              "duracion": 40
-            }
-          ]
-        },
-        {
-          "nombre": "Plancha con toque de hombro",
-          "descripcion": "Plancha alternando toques de hombro.",
-          "descanso": 30,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/plancha_con_toque_de_hombro_1.jpg",
               "repeticiones": 20,
               "duracion": 45
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/plancha_con_toque_de_hombro_2.jpg",
               "repeticiones": 20,
               "duracion": 45
             }
@@ -840,173 +397,315 @@
       ]
     },
     {
-      "nombre": "Reto Spartan",
-      "descripcion": "Circuito exigente de fuerza y resistencia.",
-      "nivel": 4,
-      "video": "https://www.youtube.com/watch?v=spa401",
+      "id": 9,
+      "nombre": "Fuerza Upper Body",
+      "descripcion": "Rutina de torso enfocada en empujes y tracciones.",
+      "nivel": 2,
+      "imagen": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200",
       "ejercicios": [
         {
-          "nombre": "Burpees con flexión",
-          "descripcion": "Burpee completo con flexión profunda.",
-          "descanso": 40,
+          "nombre": "Flexiones Suelo",
+          "descripcion": "Flexiones tradicionales completas.",
+          "descanso": 60,
+          "imagen": "https://cdn.shopify.com/s/files/1/0269/5551/3900/files/Push-Ups_600x600.png?v=1640121436",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/burpees_con_flexion_1.jpg",
               "repeticiones": 12,
-              "duracion": 50
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/burpees_con_flexion_2.jpg",
-              "repeticiones": 12,
-              "duracion": 50
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/burpees_con_flexion_3.jpg",
-              "repeticiones": 10,
-              "duracion": 45
-            }
-          ]
-        },
-        {
-          "nombre": "Sentadilla búlgara",
-          "descripcion": "Pie trasero elevado, baja controlado.",
-          "descanso": 40,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/sentadilla_bulgara_1.jpg",
-              "repeticiones": 10,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 2",
-              "foto": "img/sentadilla_bulgara_2.jpg",
-              "repeticiones": 10,
-              "duracion": 45
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/sentadilla_bulgara_3.jpg",
-              "repeticiones": 10,
-              "duracion": 45
-            }
-          ]
-        },
-        {
-          "nombre": "Dominadas australianas",
-          "descripcion": "Tira del cuerpo bajo una barra baja.",
-          "descanso": 40,
-          "series": [
-            {
-              "nombre": "Serie 1",
-              "foto": "img/dominadas_australianas_1.jpg",
-              "repeticiones": 10,
               "duracion": 40
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/dominadas_australianas_2.jpg",
-              "repeticiones": 10,
+              "repeticiones": 12,
               "duracion": 40
             }
           ]
         },
         {
-          "nombre": "Plancha con peso",
-          "descripcion": "Plancha con mochila en la espalda.",
-          "descanso": 35,
+          "nombre": "Remo con Mancuerna",
+          "descripcion": "Tracción de espalda a una mano.",
+          "descanso": 45,
+          "imagen": "https://cdn.shopify.com/s/files/1/0269/5551/3900/files/Dumbbell-Bent-Over-Row-_Single-Arm_49867db3-f465-4fbc-b359-29cbdda502e2_600x600.png?v=1612138069",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/plancha_con_peso_1.jpg",
-              "repeticiones": 1,
-              "duracion": 60
+              "repeticiones": 12,
+              "duracion": 45
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/plancha_con_peso_2.jpg",
-              "repeticiones": 1,
-              "duracion": 60
+              "repeticiones": 12,
+              "duracion": 45
             }
           ]
         }
       ]
     },
     {
-      "nombre": "Resistencia total",
-      "descripcion": "Sesión larga para trabajar la resistencia.",
-      "nivel": 4,
-      "video": "https://www.youtube.com/watch?v=res402",
+      "id": 10,
+      "nombre": "Advanced Strength",
+      "descripcion": "Rutina avanzada de fuerza para atletas experimentados.",
+      "nivel": 3,
+      "imagen": "https://previews.123rf.com/images/nattyblissful/nattyblissful2004/nattyblissful200400036/144740269-booty-or-glutes-workout-with-resistance-bands-deadlift-concept-stay-home-and-do-sport-flat-vector.jpg",
       "ejercicios": [
         {
-          "nombre": "Carrera en el sitio",
-          "descripcion": "Ritmo sostenido de carrera.",
-          "descanso": 30,
+          "nombre": "Peso Muerto",
+          "descripcion": "Peso muerto con barra olímpica.",
+          "descanso": 90,
+          "imagen": "https://proet-s3-do.fra1.digitaloceanspaces.com/exercise/new-picture-v2-0034-841565.png",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/carrera_en_el_sitio_1.jpg",
-              "repeticiones": 1,
-              "duracion": 120
+              "repeticiones": 8,
+              "duracion": 60
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/carrera_en_el_sitio_2.jpg",
-              "repeticiones": 1,
-              "duracion": 120
-            },
-            {
-              "nombre": "Serie 3",
-              "foto": "img/carrera_en_el_sitio_3.jpg",
-              "repeticiones": 1,
-              "duracion": 120
+              "repeticiones": 8,
+              "duracion": 60
             }
           ]
         },
         {
-          "nombre": "Circuito de piernas",
-          "descripcion": "Sentadilla, zancada y salto encadenados.",
-          "descanso": 40,
+          "nombre": "Press Banca",
+          "descripcion": "Press de banca con barra.",
+          "descanso": 90,
+          "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuM9h8vbV62HXvvZbkLdZKk0xWi5LNrWgijWWMmBKJ4Q&s=10",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/circuito_de_piernas_1.jpg",
-              "repeticiones": 5,
-              "duracion": 90
+              "repeticiones": 10,
+              "duracion": 50
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/circuito_de_piernas_2.jpg",
-              "repeticiones": 5,
-              "duracion": 90
+              "repeticiones": 10,
+              "duracion": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nombre": "HIIT Tabata Extremo",
+      "descripcion": "Protocolo Tabata con descansos reducidos.",
+      "nivel": 3,
+      "imagen": "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Jump Squats Explosivos",
+          "descripcion": "Sentadillas saltadas a máxima potencia.",
+          "descanso": 20,
+          "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQxUX_4IlLh2UF8ceJBas8y8pfx-lLGqD-PwDxThL7fg&s=10",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 15,
+              "duracion": 20
             },
             {
-              "nombre": "Serie 3",
-              "foto": "img/circuito_de_piernas_3.jpg",
-              "repeticiones": 5,
-              "duracion": 90
+              "nombre": "Serie 2",
+              "repeticiones": 15,
+              "duracion": 20
             }
           ]
         },
         {
-          "nombre": "Circuito de core",
-          "descripcion": "Plancha, bicicleta y superman encadenados.",
-          "descanso": 35,
+          "nombre": "Flexiones con Salto",
+          "descripcion": "Flexiones pliométricas explosivas.",
+          "descanso": 20,
+          "imagen": "https://phantom-telva.uecdn.es/a7f1da35e1b2770fd7e0f00eb4fb145a/resize/828/f/webp/assets/multimedia/imagenes/2021/02/26/16143187500035.jpg",
           "series": [
             {
               "nombre": "Serie 1",
-              "foto": "img/circuito_de_core_1.jpg",
-              "repeticiones": 5,
-              "duracion": 80
+              "repeticiones": 12,
+              "duracion": 20
             },
             {
               "nombre": "Serie 2",
-              "foto": "img/circuito_de_core_2.jpg",
+              "repeticiones": 12,
+              "duracion": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "nombre": "Hipertrofia Pierna",
+      "descripcion": "Volumen de entrenamiento enfocado en tren inferior.",
+      "nivel": 3,
+      "imagen": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Sentadilla Trasera con Barra",
+          "descripcion": "Sentadillas profundas pesadas.",
+          "descanso": 90,
+          "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa2UfO_EleZbjqYq923cBqkScw2P10G6vRhg8BQHfdZg&s=10",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 10,
+              "duracion": 60
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 10,
+              "duracion": 60
+            }
+          ]
+        },
+        {
+          "nombre": "Prensa de Piernas",
+          "descripcion": "Empuje pesado en máquina inclinado.",
+          "descanso": 60,
+          "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbJ3K85r8whLAlV6WyZPduUKqYVWKHaYbKAR1qXZTdvA&s=10",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 12,
+              "duracion": 45
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 12,
+              "duracion": 45
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "nombre": "Elite Athletic Conditioning",
+      "descripcion": "Acondicionamiento físico de alto rendimiento para atletas élite.",
+      "nivel": 4,
+      "imagen": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Clean and Jerk",
+          "descripcion": "Movimiento olímpico completo con alta exigencia técnica y peso.",
+          "descanso": 120,
+          "imagen": "https://hips.hearstapps.com/hmg-prod/images/clean-and-jerk-1630584660.jpg?resize=980:*",
+          "series": [
+            {
+              "nombre": "Serie 1",
               "repeticiones": 5,
-              "duracion": 80
+              "duracion": 60
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 5,
+              "duracion": 60
+            }
+          ]
+        },
+        {
+          "nombre": "Muscle Ups",
+          "descripcion": "Dominada olímpica sobre barra alta.",
+          "descanso": 90,
+          "imagen": "https://mundoentrenamiento.com/wp-content/uploads/2021/08/ejecucion-del-muscle-up.jpeg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 6,
+              "duracion": 45
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 6,
+              "duracion": 45
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "nombre": "Calisthenics Beast Mode",
+      "descripcion": "Rutina de calistenia extrema avanzada sin apoyo corporal continuo.",
+      "nivel": 4,
+      "imagen": "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Flexiones en Pino",
+          "descripcion": "Flexiones en pino vertical estricto contra pared o libre.",
+          "descanso": 90,
+          "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXUKj109G-hlHVcwmvNz9_8gsbJ5ZCf-bEVclefZ8xc5kJXGMHYOkGh0Nd&s=10",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 8,
+              "duracion": 45
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 8,
+              "duracion": 45
+            }
+          ]
+        },
+        {
+          "nombre": "Front Lever Holds",
+          "descripcion": "Mantenimiento estático horizontal en barra fija.",
+          "descanso": 90,
+          "imagen": "https://ericflag.com/cdn/shop/articles/front_lever_8025a89a-fbc4-485a-b2e5-f15ce88db828.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 1,
+              "duracion": 20
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 1,
+              "duracion": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "nombre": "Powerlifting Max Strength",
+      "descripcion": "Entrenamiento de máxima fuerza enfocado a levantamientos límite.",
+      "nivel": 4,
+      "imagen": "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200",
+      "ejercicios": [
+        {
+          "nombre": "Sentadilla PESADA 90% 1RM",
+          "descripcion": "Levantamiento de fuerza máxima con asistencia.",
+          "descanso": 180,
+          "imagen": "https://images.ctfassets.net/473zoc40547p/image_7zqo4d6qoa4ixtbx1pac7/12e75a4b846984911885e91e39a508a7/SEO_20Blog_20Article_Header_20Image_Beginner_E2_80_99s_20Guide_20to_20the_20Smith_20Machine_20Bench_20Squats.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 3,
+              "duracion": 45
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 3,
+              "duracion": 45
+            }
+          ]
+        },
+        {
+          "nombre": "Peso Muerto Deficitario",
+          "descripcion": "Tracción sobre déficit de altura a máxima carga.",
+          "descanso": 180,
+          "imagen": "https://static.strengthlevel.com/images/exercises/deficit-deadlift/deficit-deadlift-800.jpg",
+          "series": [
+            {
+              "nombre": "Serie 1",
+              "repeticiones": 3,
+              "duracion": 50
+            },
+            {
+              "nombre": "Serie 2",
+              "repeticiones": 3,
+              "duracion": 50
             }
           ]
         }

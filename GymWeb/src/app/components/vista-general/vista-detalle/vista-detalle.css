@@ -31,6 +31,19 @@ background-color: #7f97e7;
   font-size: 1.1rem;
 }
 
+
+h1 {
+  max-width: 800px;
+  margin: 2rem auto 1rem auto;
+  text-align: center;
+    background: #0f172a;
+  color: #ffffff;
+  padding: 1rem ;
+  border-radius: 12px;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
 table {
   max-width: 1200px;
   margin: 2.5rem auto;
@@ -84,12 +97,12 @@ tbody tr:last-child td {
 
 td.foto {
   text-align: center;
-  width: 150px;
+  width: 220px;
 }
 
 td.foto img {
-  width: 110px; 
-  height: 110px;
+  width: 180px; 
+  height: 180px;
   object-fit: cover;
   border-radius: 10px;
   display: block;
@@ -111,8 +124,8 @@ td.foto img {
 
   /*NO DEFORMA LAS FOTOS*/
   td.foto img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
   }
 }
@@ -120,4 +133,3 @@ td.foto img {
 *:focus-visible {
   outline: 3px solid #2563eb;
 }
-
