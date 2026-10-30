@@ -1,6 +1,5 @@
 export interface Serie {
   nombre: string;
-  foto: string;
   repeticiones: number;
   duracion: number;
 }
@@ -17,5 +16,6 @@ export interface Workout {
   descripcion: string;
   nivel: number;
   video: string;
+  imagen: string;
   ejercicios: Ejercicio[];
 }

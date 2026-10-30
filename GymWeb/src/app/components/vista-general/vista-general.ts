@@ -41,9 +41,9 @@ const busqueda = this.rutinasService.busquedaInput().toLowerCase().trim();
     if (filtro === 'Principiante') {
       filtroBien = nivel >= 0 && nivel <= 1;
     } else if (filtro === 'Intermedio') {
-      filtroBien = nivel === 2;
+      filtroBien = nivel >= 2 && nivel <=3;
     } else if (filtro === 'Avanzado') {
-      filtroBien = nivel === 3;
+      filtroBien = nivel === 4;
     }
 
   const nombreWorkout = workout.nombre.toLowerCase();

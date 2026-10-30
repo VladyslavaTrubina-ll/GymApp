@@ -21,3 +21,5 @@ export class FormatoDuracionPipe implements PipeTransform {
     return resultado; //formateo
   }
 }
+
+

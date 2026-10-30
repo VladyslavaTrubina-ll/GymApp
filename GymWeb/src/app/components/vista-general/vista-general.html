@@ -6,15 +6,15 @@
 
   </header>
 
-  <div class="filtrador">
-    <label for="filtrador" id="lblFiltro">Filtro por dificultad</label>
-    <select name="filtroNivel" [(ngModel)]="nivelSeleccionado">
-      <option value="" selected>Todos los niveles</option>
-      <option value="Principiante">Principiante</option>
-      <option value="Intermedio">Intermedio</option>
-      <option value="Avanzado">Avanzado</option>
-    </select>
-  </div>
+ <div class="filtrador">
+  <label for="filtrador" id="lblFiltro">Filtro por dificultad</label>
+  <select id="filtrador" name="filtroNivel" [(ngModel)]="nivelSeleccionado">
+    <option value="" selected>Todos los niveles</option>
+    <option value="Principiante">Principiante</option>
+    <option value="Intermedio">Intermedio</option>
+    <option value="Avanzado">Avanzado</option>
+  </select>
+</div>
 
   <div class="busqueda">
     <input type="text" placeholder="Buscar workouts..." [(ngModel)]="rutinasService.busquedaInput">
@@ -24,6 +24,9 @@
     <div class="contenedor-Workouts">
       @for (workout of workoutsFiltroYBusqueda(); track workout.nombre) {
         <div class="listaWorkouts">
+
+          <img src="{{workout.imagen}}" alt="Workout">
+
           <div class="campoWorkout">
             <span class="etiqueta"></span>
             <a [routerLink]="['/rutina', workout.nombre]" class="enlaceWorkout">
