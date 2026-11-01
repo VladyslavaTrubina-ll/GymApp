@@ -1,82 +1,71 @@
 package model;
 
-import java.io.Serializable;
+public class Serie {
 
-public class Serie implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	private int descanso;
-	private int duracion;
-	private String foto;
-	private String nombre;
-	private int repeticiones;
-	private String id;
-	
-	
-	public Serie() {
-		
-	}
+    private String id;
+    private int descanso;
+    private int duracion;
+    private String foto;
+    private String nombre;
+    private int repeticiones;
 
-	public Serie(int descanso, int duracion, String foto, String nombre, int repeticiones, String id) {
-		this.descanso = descanso;
-		this.duracion = duracion;
-		this.foto = foto;
-		this.nombre = nombre;
-		this.repeticiones = repeticiones;
-		this.id= id;
-	}
+    public Serie() {
 
-	public int getDescanso() {
-		return descanso;
-	}
+    }
 
-	public void setDescanso(int descanso) {
-		this.descanso = descanso;
-	}
+    public Serie(int descanso, int duracion, String foto, String nombre, int repeticiones) {
+        this.descanso = descanso;
+        this.duracion = duracion;
+        this.foto = foto;
+        this.nombre = nombre;
+        this.repeticiones = repeticiones;
+    }
 
-	public int getDuracion() {
-		return duracion;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getFoto() {
-		return foto;
-	}
+    public int getDescanso() {
+        return descanso;
+    }
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
+    public void setDescanso(int descanso) {
+        this.descanso = descanso;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public int getDuracion() {
+        return duracion;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
 
-	public int getRepeticiones() {
-		return repeticiones;
-	}
+    public String getFoto() {
+        return foto;
+    }
 
-	public void setRepeticiones(int repeticiones) {
-		this.repeticiones = repeticiones;
-	}
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
-	
-	public String getId() {
-		return id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	
-	
-	
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getRepeticiones() {
+        return repeticiones;
+    }
+
+    public void setRepeticiones(int repeticiones) {
+        this.repeticiones = repeticiones;
+    }
 }

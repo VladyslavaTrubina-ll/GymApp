@@ -1,42 +1,30 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Workout implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String id;
 	private String nombre;
 	private String video;
 	private int level;
+	private String descripcion;
+	private String id;
+	
+	
+
 	private List<Exercise> ejercicios;
 	
 	public Workout() {
 	}
 
-	
-
-	public Workout(String id, String nombre, String video, int level, List<Exercise> ejercicios) {
-		this.id = id;
+	public Workout(String nombre, String video, int level, List<Exercise> ejercicios) {
 		this.nombre = nombre;
 		this.video = video;
 		this.level = level;
 		this.ejercicios = ejercicios;
-	}
-	
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	/**
@@ -91,10 +79,25 @@ public class Workout implements Serializable{
 	/**
 	 * @param ejercicios the ejercicios to set
 	 */
-	public void setEjercicios(List<Exercise> ejercicios) {
+	public void setEjercicios(ArrayList<Exercise> ejercicios) {
 		this.ejercicios = ejercicios;
 	}
 	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 }
