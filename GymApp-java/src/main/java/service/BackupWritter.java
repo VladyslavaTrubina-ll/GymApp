@@ -8,8 +8,10 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
 import java.util.Map;
+
+import model.User;
 import model.Workout;
-//import model.User;
+
 
 
 public class BackupWritter {
@@ -45,10 +47,10 @@ public class BackupWritter {
 		}
 	}
 
-	/*  PENDIENTE DE PUNTUALIZAR EL ESTADO DEL PROCESO DE BACKUPS DE USUARIOS
+	
 	public void escribirUsuarios(String nombreArchivo, Map<String, User> datos) throws IOException{
-		escribir("usuarios.dat", usuarios);
-	} */
+		escribir("usuarios.dat", datos);
+	} 
 	
 	public void escribirWorkouts(Map<String,Workout> datos) throws IOException{
 		escribir("workouts.dat", datos);
