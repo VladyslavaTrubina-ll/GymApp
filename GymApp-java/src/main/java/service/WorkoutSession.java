@@ -38,7 +38,7 @@ public class WorkoutSession {
         this.totalExercises = totalExercises;
     }
 
-    // Create history only on the first PLAY
+    // Crea la historyworkout al hacer play
     public synchronized void startIfNeeded() {
 
         if (historyId == null) {
@@ -51,7 +51,7 @@ public class WorkoutSession {
         }
     }
 
-    // Count elapsed seconds
+    // cuenta segundos
     public synchronized void addElapsedSecond() {
 
         if (historyId != null) {
@@ -59,7 +59,7 @@ public class WorkoutSession {
         }
     }
 
-    // Mark a series as completed
+    // MArca una serie como completada
     public synchronized void completeSeries(
             String exerciseKey,
             String seriesKey,
@@ -85,7 +85,7 @@ public class WorkoutSession {
         saveProgress();
     }
 
-    // Update the same history document
+    // Update sobre el historyworkout
     public synchronized void saveProgress() {
 
         if (historyId == null) {

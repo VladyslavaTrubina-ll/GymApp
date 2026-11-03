@@ -11,30 +11,24 @@ import java.io.File;
 
 public class SerieTimerView extends JFrame {
 
+	//variables auxiliares para el timer
     private int exerciseSecondsLeft;
     private int restSecondsLeft;
-
-    private Timer timer;
-
     private boolean resting = false;
     private boolean seriesFinished = false;
     private boolean awaitingNextRepetition = false;
-
-    private JLabel exerciseTimeLabel;
-    private JLabel restTimeLabel;
-    private JLabel repetitionsLabel;
-
-    private JButton playButton;
-
     private int currentRepetition = 1;
     private final int totalRepetitions;
-
-    private final Serie serie;
-    private final WorkoutSession session;
     private final String seriesKey;
     private final String exerciseKey;
     private final int totalSeriesForExercise;
 
+    //variables objetos
+    private final Serie serie;
+    private final WorkoutSession session;
+    
+
+    //variables JFRAMe
     private final Color BACKGROUND =
             new Color(38, 42, 50);
 
@@ -46,6 +40,12 @@ public class SerieTimerView extends JFrame {
 
     private final Color RED =
             new Color(230, 65, 65);
+    
+    private JButton playButton;
+    private JLabel exerciseTimeLabel;
+    private JLabel restTimeLabel;
+    private JLabel repetitionsLabel;
+    private Timer timer;
 
     public SerieTimerView(
             Serie serie,
@@ -84,7 +84,7 @@ public class SerieTimerView extends JFrame {
         main.setBorder(new EmptyBorder(15, 15, 15, 15));
 
         // =================================================
-        // HEADER
+        //contenedor(HEADER) primera fila
         // =================================================
 
         JPanel header = new JPanel(
@@ -112,7 +112,7 @@ public class SerieTimerView extends JFrame {
         main.add(header, BorderLayout.NORTH);
 
         // =================================================
-        // CENTER
+        // Contenedor centro
         // =================================================
 
         JPanel center = new JPanel();
@@ -123,7 +123,7 @@ public class SerieTimerView extends JFrame {
 
         center.setBackground(BACKGROUND);
 
-        // REPETITIONS
+        // REPETICIONES
 
         JPanel repetitionsPanel =
                 createTimerPanel("REPETICIÓN");
@@ -143,7 +143,7 @@ public class SerieTimerView extends JFrame {
 
         center.add(Box.createVerticalStrut(10));
 
-        // EXERCISE TIMER
+        // Cronometro del ejercicio
 
         JPanel exerciseTimerPanel =
                 createTimerPanel("TIEMPO EJERCICIO");
@@ -163,7 +163,7 @@ public class SerieTimerView extends JFrame {
 
         center.add(Box.createVerticalStrut(10));
 
-        // REST TIMER
+        // contador descanso
 
         JPanel restTimerPanel =
                 createTimerPanel("DESCANSO");
@@ -183,7 +183,7 @@ public class SerieTimerView extends JFrame {
 
         center.add(Box.createVerticalStrut(20));
 
-        // SERIES PHOTO
+        // foto de la serie
 
         JLabel imageLabel = new JLabel();
 
@@ -228,7 +228,7 @@ public class SerieTimerView extends JFrame {
         main.add(center, BorderLayout.CENTER);
 
         // =================================================
-        // BUTTONS
+        // Botones
         // =================================================
 
         JPanel buttons = new JPanel(
@@ -270,7 +270,7 @@ public class SerieTimerView extends JFrame {
         add(main);
 
         // =================================================
-        // TIMER
+        // boton PLAY
         // =================================================
 
         timer = new Timer(1000, e -> updateTimer());
@@ -279,7 +279,7 @@ public class SerieTimerView extends JFrame {
 
         playButton.addActionListener(e -> {
 
-            // Pause the timer
+            // Pausa el cronometro
             if (timer.isRunning()) {
 
                 timer.stop();
@@ -295,10 +295,10 @@ public class SerieTimerView extends JFrame {
 
             try {
 
-                // Creates history only on the first PLAY.
+                // Crea el workouthistory SOLO al primer play
                 session.startIfNeeded();
 
-                // Start the next repetition
+                // Empieza la siguiente repeticion
                 if (awaitingNextRepetition) {
 
                     currentRepetition++;
@@ -354,7 +354,7 @@ public class SerieTimerView extends JFrame {
             }
         });
 
-        // EXIT
+        // BOTON SALIR
 
         exitButton.addActionListener(e -> {
 
@@ -368,7 +368,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // TIMER PANELS
+    // Contenedor cronometros
     // =====================================================
 
     private JPanel createTimerPanel(String title) {
@@ -408,7 +408,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // UPDATE TIMER
+    // ACTUALIZA EL CRONOTMETRO
     // =====================================================
 
     private void updateTimer() {
@@ -442,7 +442,7 @@ public class SerieTimerView extends JFrame {
 
         } else {
 
-            // REST TIMER - do not add to totalTime
+            // DESCANSO- NO SE AÑADE AL TOTAL DE TIEMPO
             restSecondsLeft--;
 
             restTimeLabel.setText(
@@ -461,7 +461,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // FINISH REPETITION
+    // FINALIZAR REPETICION
     // =====================================================
 
     private void finishRepetition() {
@@ -493,7 +493,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // FINISH SERIES
+    // FINALIZA LA SERIE (despues de todas las sesiones)
     // =====================================================
 
     private void finishSeries() {
@@ -522,7 +522,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // SAVE HISTORY
+    // GUARDAR historia
     // =====================================================
 
     private void saveSessionSafely() {
@@ -592,7 +592,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // FORMAT REPETITIONS
+    // FORMATO PARA REPETICIONES
     // =====================================================
 
     private String formatRepetitions() {
@@ -605,7 +605,7 @@ public class SerieTimerView extends JFrame {
     }
 
     // =====================================================
-    // FORMAT TIME
+    // FORMATO PARA EL TIEMPO
     // =====================================================
 
     private String formatTime(int seconds) {
