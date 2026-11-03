@@ -31,6 +31,9 @@ import service.WorkoutService;
 
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 
+import model.Exercise;
+import model.Workout;
+
 import java.util.List;
 
 import java.awt.event.ActionListener;
@@ -40,6 +43,7 @@ public class HomeView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
+    //Recursos JFRAME
     private JPanel contentPane;
     private CardLayout cardLayout;
     private JPanel cardPanel;
@@ -47,13 +51,15 @@ public class HomeView extends JFrame {
     private JPanel workoutsListPanel;
     private JTextField tfFirstName, tfLastName, tfEmail, tfBirthDate;
     private int currentLevel = 0;
+    private WorkoutDetailView workoutDetailView;
 
+    //metodos para usuario y workout
     private final UserService userService = new UserService();
     private final WorkoutService workoutService = new WorkoutService();
 
     private String currentUserId;
 
-    // Modern GymApp color palette
+    // PALETA DE COLORES
     private final Color BACKGROUND = new Color(243, 246, 252);
     private final Color NAVY = new Color(25, 35, 58);
     private final Color BLUE = new Color(55, 105, 220);
@@ -92,9 +98,10 @@ public class HomeView extends JFrame {
      */
     public HomeView(String uid) {
 
+    	//guarda el uid del usuario logeado
         this.currentUserId = uid;
 
-        setTitle("GymApp | Home");
+        setTitle("Home");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900, 650);
         setMinimumSize(new Dimension(760, 500));
@@ -105,7 +112,7 @@ public class HomeView extends JFrame {
         contentPane.setBorder(new EmptyBorder(25, 25, 25, 25));
         setContentPane(contentPane);
 
-        // menu lateral
+        // MENU LATERAL
         JPanel sidebar = new JPanel();
         sidebar.setLayout(new GridLayout(6, 1, 0, 12));
         sidebar.setPreferredSize(new Dimension(170, 0));
@@ -137,17 +144,9 @@ public class HomeView extends JFrame {
         JButton btnHistory = createSidebarButton("Historial");
         sidebar.add(btnHistory);
 
-        JLabel lblFooter = new JLabel(
-                "<html><center>Tu progreso<br>empieza aquí</center></html>",
-                SwingConstants.CENTER
-        );
-        lblFooter.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        lblFooter.setForeground(new Color(190, 201, 222));
-        sidebar.add(lblFooter);
-
         contentPane.add(sidebar, BorderLayout.WEST);
 
-        // Contenedor principal
+        // CONTENEDOR PRINCIPAL
         JPanel mainPanel = new JPanel(new BorderLayout(0, 18));
         mainPanel.setBackground(BACKGROUND);
 
@@ -467,6 +466,7 @@ public class HomeView extends JFrame {
      */
     private void loadAvailableWorkouts() {
 
+    	//limpia el panel para volver a recargar otra vez
         workoutsListPanel.removeAll();
 
         JLabel loadingLabel = new JLabel("Cargando workouts...");
@@ -482,14 +482,19 @@ public class HomeView extends JFrame {
             @Override
             public void run() {
                 try {
+                	
+                	//lista para almacenar los workouts disponibles
                     List<QueryDocumentSnapshot> workouts =
                             workoutService.getAvailableWorkouts(currentUserId);
 
                     javax.swing.SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                        	
+                        	//limpia el panel donde se lista los workouts
                             workoutsListPanel.removeAll();
 
+                            //si la lista esta vacia
                             if (workouts.isEmpty()) {
                                 JLabel emptyLabel = new JLabel(
                                         "No hay workouts disponibles para tu nivel."
@@ -499,6 +504,8 @@ public class HomeView extends JFrame {
                                 );
                                 emptyLabel.setForeground(MUTED);
                                 workoutsListPanel.add(emptyLabel);
+                                
+                                //si existen workouts, se listara mostrando algunos detalles
                             } else {
                                 for (QueryDocumentSnapshot workout : workouts) {
                                     String name = workout.getString("nombre");
@@ -515,13 +522,19 @@ public class HomeView extends JFrame {
                                             workout.getString("descripcion");
 
                                     String video = workout.getString("video");
+                                    
+                                    String id=workout.getString("id");
+                                    
+                                    //construimos el objeto Workout para poder pasarlo a la ventana detalles
+                                    Workout workoutObject = new Workout();
 
-                                    JPanel workoutCard = createWorkoutCard(
-                                            name,
-                                            level,
-                                            description,
-                                            video
-                                    );
+                                    workoutObject.setId(id);
+                                    workoutObject.setNombre(name);
+                                    workoutObject.setLevel(level);
+                                    workoutObject.setDescripcion(description);
+                                    workoutObject.setVideo(video);
+                                    
+                                    JPanel workoutCard = createWorkoutCard(workoutObject );
 
                                     workoutsListPanel.add(workoutCard);
                                     workoutsListPanel.add(
@@ -564,115 +577,120 @@ public class HomeView extends JFrame {
         }).start();
     }
 
-    private JPanel createWorkoutCard(
-            String name,
-            int level,
-            String description,
-            String video) {
+    
+private JPanel createWorkoutCard(Workout workout) {
 
-        JPanel card = new JPanel(new BorderLayout(15, 10));
-        card.setBackground(WHITE);
-        card.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(BORDER, 1),
-                new EmptyBorder(16, 16, 16, 16)
-        ));
+    String name = workout.getNombre();
+    int level = workout.getLevel();
+    String description = workout.getDescripcion();
 
-        card.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
-        card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
-        card.setPreferredSize(new Dimension(450, 135));
+    JPanel card = new JPanel(new BorderLayout(15, 10));
+    card.setBackground(WHITE);
+    card.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(BORDER, 1),
+            new EmptyBorder(16, 16, 16, 16)
+    ));
 
-        JPanel informationPanel = new JPanel();
-        informationPanel.setLayout(
-                new BoxLayout(informationPanel, BoxLayout.Y_AXIS)
-        );
-        informationPanel.setBackground(WHITE);
+    card.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+    card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
+    card.setPreferredSize(new Dimension(450, 135));
 
-        JLabel nameLabel = new JLabel(name);
-        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 17));
-        nameLabel.setForeground(NAVY);
-        nameLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+    JPanel informationPanel = new JPanel();
+    informationPanel.setLayout(
+            new BoxLayout(informationPanel, BoxLayout.Y_AXIS)
+    );
+    informationPanel.setBackground(WHITE);
 
-        JLabel levelLabel = new JLabel("Nivel " + level);
-        levelLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        levelLabel.setForeground(BLUE);
-        levelLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+    JLabel nameLabel = new JLabel(name);
+    nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 17));
+    nameLabel.setForeground(NAVY);
+    nameLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
 
-        String safeDescription =
-                description != null && !description.isBlank()
-                ? description : "Sin descripción disponible.";
+    JLabel levelLabel = new JLabel("Nivel " + level);
+    levelLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+    levelLabel.setForeground(BLUE);
+    levelLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
 
-        JLabel descriptionLabel = new JLabel(
-                "<html><div style='width:260px;'>"
-                + safeDescription
-                + "</div></html>"
-        );
-        descriptionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        descriptionLabel.setForeground(TEXT);
-        descriptionLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+    String safeDescription =
+            description != null && !description.isBlank()
+            ? description : "Sin descripción disponible.";
 
-        informationPanel.add(nameLabel);
-        informationPanel.add(Box.createVerticalStrut(5));
-        informationPanel.add(levelLabel);
-        informationPanel.add(Box.createVerticalStrut(8));
-        informationPanel.add(descriptionLabel);
+    JLabel descriptionLabel = new JLabel(
+            "<html><div style='width:260px;'>"
+            + safeDescription
+            + "</div></html>"
+    );
 
-        JButton btnStart = createPrimaryButton("START");
-        btnStart.setPreferredSize(new Dimension(100, 40));
+    descriptionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+    descriptionLabel.setForeground(TEXT);
+    descriptionLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
 
-        if (video == null || video.isBlank()) {
-            btnStart.setEnabled(false);
-            btnStart.setToolTipText(
-                    "Este workout no tiene un vídeo disponible."
-            );
-        } else {
-            btnStart.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        URI videoUri = new URI(video);
+    informationPanel.add(nameLabel);
+    informationPanel.add(Box.createVerticalStrut(5));
+    informationPanel.add(levelLabel);
+    informationPanel.add(Box.createVerticalStrut(8));
+    informationPanel.add(descriptionLabel);
 
-                        if (!"https".equalsIgnoreCase(videoUri.getScheme())
-                                && !"http".equalsIgnoreCase(videoUri.getScheme())) {
-                            throw new IllegalArgumentException(
-                                    "La URL del vídeo no es válida."
-                            );
-                        }
+    JButton btnStart = createPrimaryButton("VER");
+    btnStart.setPreferredSize(new Dimension(100, 40));
 
-                        if (Desktop.isDesktopSupported()
-                                && Desktop.getDesktop().isSupported(
-                                        Desktop.Action.BROWSE)) {
-                            Desktop.getDesktop().browse(videoUri);
-                        } else {
-                            JOptionPane.showMessageDialog(
-                                    HomeView.this,
-                                    "No se puede abrir el navegador en este equipo.",
-                                    "Error",
-                                    JOptionPane.ERROR_MESSAGE
-                            );
-                        }
+    // OPEN WORKOUT DETAILS
+    btnStart.addActionListener(e -> {
 
-                    } catch (Exception ex) {
+        new Thread(() -> {
+
+            try {
+
+                // Carga los detalles del workout seleccionado apartir del ID
+                Workout completeWorkout =
+                        workoutService.getWorkoutDetails(workout.getId());
+
+                javax.swing.SwingUtilities.invokeLater(() -> {
+
+                    WorkoutDetailView detailView =new WorkoutDetailView(completeWorkout, currentUserId);
+
+                    JFrame detailFrame = new JFrame(
+                            completeWorkout.getNombre()
+                    );
+
+                    detailFrame.setDefaultCloseOperation(
+                            JFrame.DISPOSE_ON_CLOSE
+                    );
+
+                    detailFrame.setSize(1000, 750);
+                    detailFrame.setLocationRelativeTo(this);
+                    detailFrame.setContentPane(detailView);
+                    detailFrame.setVisible(true);
+
+                });
+
+            } catch (Exception ex) {
+
+                ex.printStackTrace();
+
+                javax.swing.SwingUtilities.invokeLater(() ->
                         JOptionPane.showMessageDialog(
-                                HomeView.this,
-                                "No se ha podido abrir el vídeo:\n"
-                                + ex.getMessage(),
+                                this,
+                                "Could not load workout details: "
+                                        + ex.getMessage(),
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE
-                        );
-                    }
-                }
-            });
-        }
+                        )
+                );
+            }
 
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.setBackground(WHITE);
-        buttonPanel.add(btnStart, BorderLayout.CENTER);
+        }).start();
+    });
 
-        card.add(informationPanel, BorderLayout.CENTER);
-        card.add(buttonPanel, BorderLayout.EAST);
+    JPanel buttonPanel = new JPanel(new BorderLayout());
+    buttonPanel.setBackground(WHITE);
+    buttonPanel.add(btnStart, BorderLayout.CENTER);
 
-        return card;
-    }
+    card.add(informationPanel, BorderLayout.CENTER);
+    card.add(buttonPanel, BorderLayout.EAST);
+
+    return card;
+}
 
     public void updateUserData(
             String firstName,

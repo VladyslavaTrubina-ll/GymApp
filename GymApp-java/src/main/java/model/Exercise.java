@@ -1,28 +1,19 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Exercise implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
+	private String id;
 	private String nombre;
 	private String descripcion;
-	private String id;
 	private List<Serie> series;
-	
+
 	public Exercise() {
 	}
-	
-	
-
-	public Exercise(String nombre, String descripcion, String id, List<Serie> series) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.id = id;
-		this.series = series;
-	}
-
 
 
 	/**
@@ -63,25 +54,15 @@ public class Exercise implements Serializable{
 	/**
 	 * @param series the series to set
 	 */
-	public void setSeries(List<Serie> series) {
+	public void setSeries(ArrayList<Serie> series) {
 		this.series = series;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
-	
-
 }

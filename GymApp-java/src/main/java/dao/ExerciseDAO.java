@@ -12,7 +12,9 @@ import model.Exercise;
 import model.Serie;
 import service.DBconnect;
 
+public class ExerciseDAO {
 
+    private final SerieDAO serieDAO;
 
 public class ExerciseDAO {
 	

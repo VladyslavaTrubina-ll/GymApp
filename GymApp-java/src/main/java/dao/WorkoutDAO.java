@@ -57,7 +57,9 @@ public class WorkoutDAO {
 		List<Workout> workouts = obtenerTodos();
 		
 		for (Workout workout: workouts) {
-			List<Exercise> ejercicios = exerciseDao.obtenerPorWorkoutCompleto(workout.getId());
+			ArrayList<Exercise> ejercicios = new ArrayList<>(
+				    exerciseDao.obtenerPorWorkoutCompleto(workout.getId())
+				);
 			workout.setEjercicios(ejercicios);
 		}
 		
