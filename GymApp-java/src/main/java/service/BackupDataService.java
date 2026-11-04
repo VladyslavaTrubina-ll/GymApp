@@ -72,6 +72,12 @@ public class BackupDataService{
 	}
 	//-----------------------------------------
 	//	BACKUP USUARIOS
+	/**
+	 * Recupera los usuarios registrados y conforma el hashmap
+	 * @param uid
+	 * @return
+	 * @throws Exception
+	 */
 	public Map<String, User> obtenerUsuariosBackup(String uid) throws Exception{
 		
 		Map<String, User> usuariosBackup = new HashMap<>();
