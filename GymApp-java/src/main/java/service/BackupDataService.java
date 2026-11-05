@@ -82,7 +82,7 @@ public class BackupDataService{
 		}
 		
 		//	RECUPERAR DOCUMENTOS DESDE FIRESTORE CON LOS METODOS DE USERSERVICE
-		DocumentSnapshot documento = userService.getUserProfileAsync(uid).get();
+		DocumentSnapshot documento = userService.getUserProfileAsync(uid);
 		
 		//	VERIFICAMOS QUE EL DOCUMENTO EXISTE
 		if(documento == null || !documento.exists()) {
