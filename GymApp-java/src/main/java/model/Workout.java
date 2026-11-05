@@ -23,7 +23,7 @@ public class Workout implements Serializable{
 	public Workout(String nombre, String video, int level, List<Exercise> ejercicios) {
 		this.nombre = nombre;
 		this.video = video;
-		this.nivel = level;
+		this.level = level;
 		this.ejercicios = ejercicios;
 	}
 
@@ -59,14 +59,14 @@ public class Workout implements Serializable{
 	 * @return the level
 	 */
 	public int getNivel() {
-		return nivel;
+		return level;
 	}
 
 	/**
 	 * @param level the level to set
 	 */
 	public void setNivel(int level) {
-		this.nivel = level;
+		this.level = level;
 	}
 
 	/**

@@ -54,7 +54,7 @@ public class Exercise implements Serializable{
 	/**
 	 * @param series the series to set
 	 */
-	public void setSeries(ArrayList<Serie> series) {
+	public void setSeries(List<Serie> series) {
 		this.series = series;
 	}
 

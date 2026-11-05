@@ -13,10 +13,12 @@ public class UserService {
     /**
      * Recibe de forma asíncrona los datos del usuario en función de su UID desde Firestore.
      */
-    public ApiFuture<DocumentSnapshot> getUserProfileAsync(String uid) throws Exception {
-        Firestore db = DBconnect.getFirestore();
-        return db.collection("users").document(uid).get();
-    }
+	public DocumentSnapshot getUserProfileAsync(String uid) throws Exception {
+
+	    Firestore db = DBconnect.getFirestore();
+
+	    return db.collection("users").document(uid).get().get();
+	}
 
     /**
      * Actualiza de forma asíncrona los datos del perfil en Firestore.

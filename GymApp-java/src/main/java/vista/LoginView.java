@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -48,6 +49,11 @@ public class LoginView extends JFrame {
     private final Color WHITE = Color.WHITE;
     private final Color BORDER = new Color(220, 226, 237);
 
+    //atributos de clase
+    private Socket socket;
+    private PrintWriter output;
+    private BufferedReader input;
+    
     /**
      * Launch the application.
      */
@@ -80,7 +86,7 @@ public class LoginView extends JFrame {
         contentPane.setBorder(new EmptyBorder(30, 35, 30, 35));
         setContentPane(contentPane);
 
-        // Main white card
+        // Contenedor card
         JPanel card = new JPanel(new GridBagLayout());
         card.setBackground(WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
@@ -94,7 +100,7 @@ public class LoginView extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(7, 0, 7, 0);
 
-        // App title
+        // Titulo App
         JLabel lblTitle = new JLabel("GYMAPP", SwingConstants.CENTER);
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
         lblTitle.setForeground(NAVY);
@@ -103,16 +109,7 @@ public class LoginView extends JFrame {
         gbc.insets = new Insets(0, 0, 5, 0);
         card.add(lblTitle, gbc);
 
-        JLabel lblSubtitle = new JLabel(
-                "Bienvenido de nuevo",
-                SwingConstants.CENTER
-        );
-        lblSubtitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        lblSubtitle.setForeground(MUTED);
-
-        gbc.gridy = 1;
-        gbc.insets = new Insets(0, 0, 25, 0);
-        card.add(lblSubtitle, gbc);
+        
 
         // Email label
         JLabel lblUsuario = new JLabel("Email");
@@ -169,7 +166,17 @@ public class LoginView extends JFrame {
                 SwingConstants.CENTER
         );
         lblRegistro.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        lblRegistro.setForeground(MUTED);
+        lblRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Abre la ventana RegisterView
+        lblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                RegisterView registerFrame = new RegisterView();
+                registerFrame.setVisible(true);
+                LoginView.this.dispose();
+            }
+        });
 
         gbc.gridy = 7;
         gbc.insets = new Insets(5, 0, 0, 0);
@@ -184,7 +191,7 @@ public class LoginView extends JFrame {
         mainGbc.fill = GridBagConstraints.BOTH;
         contentPane.add(card, mainGbc);
 
-        // ORIGINAL LOGIN LOGIC — unchanged
+        // BOTON LOGIN
         btnEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -200,7 +207,7 @@ public class LoginView extends JFrame {
                     return;
                 }
 
-                Socket socket = null;
+                
                 try {
                     // 3. Create the User object
                     User user = new User();
@@ -217,20 +224,20 @@ public class LoginView extends JFrame {
                     // 6. Convert the User object into JSON
                     String json = gson.toJson(jsonObject);
 
-                    // 7. Connect to the server
+                    // 7. Conecta el servidor y sus Streams
                     socket = new Socket("localhost", 5000);
 
-                    // 8. Send the JSON to the server
-                    PrintWriter output = new PrintWriter(
-                            socket.getOutputStream(), true);
+                    output = new PrintWriter(socket.getOutputStream(), true);
 
-                    output.write(json + "\n");
-                    output.flush();
-
-                    // 9. Receive the server response
-                    BufferedReader input = new BufferedReader(
+                    
+                    input = new BufferedReader(
                             new InputStreamReader(socket.getInputStream()));
-
+                    
+                    // 8. Send login request
+                    output.println(json);
+                    output.flush();
+                    
+                    // 9. Receive the server response
                     String response = input.readLine();
 
                     // Convert the String into a JSON object
@@ -255,7 +262,12 @@ public class LoginView extends JFrame {
                             public void run() {
                                 try {
                                     // Creamos la ventana HomeView pasando el UID
-                                    HomeView homeFrame = new HomeView(uid);
+                                	HomeView homeFrame = new HomeView(
+                                	        uid,
+                                	        socket,
+                                	        output,
+                                	        input
+                                	);
                                     homeFrame.setVisible(true);
 
                                     // Cerramos la ventana de login actual
@@ -275,21 +287,12 @@ public class LoginView extends JFrame {
                     JOptionPane.showMessageDialog(
                             LoginView.this,
                             "Error: " + ex.getMessage());
-                } finally {
-                    // Garantiza que el socket no quede abierto
-                    if (socket != null && !socket.isClosed()) {
-                        try {
-                            socket.close();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
                 }
             }
         });
     }
 
-    // Styling helper only — does not change login behavior
+    // Estilo de los campos del formulario
     private void styleInput(JTextField field) {
         field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         field.setForeground(TEXT);

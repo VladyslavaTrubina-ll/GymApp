@@ -8,6 +8,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class SerieTimerView extends JFrame {
 
@@ -46,6 +48,7 @@ public class SerieTimerView extends JFrame {
     private JLabel restTimeLabel;
     private JLabel repetitionsLabel;
     private Timer timer;
+    
 
     public SerieTimerView(
             Serie serie,
@@ -75,7 +78,16 @@ public class SerieTimerView extends JFrame {
 
         setLocationRelativeTo(null);
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                timer.stop();
+                saveSessionSafely();
+                dispose();
+            }
+        });
 
         JPanel main = new JPanel(new BorderLayout(15, 15));
 
@@ -363,7 +375,6 @@ public class SerieTimerView extends JFrame {
             saveSessionSafely();
 
             dispose();
-
         });
     }
 

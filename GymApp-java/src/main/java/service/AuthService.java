@@ -138,7 +138,7 @@ public class AuthService {
         if (response.statusCode() != 200) {
             Map<String, Object> result = new HashMap<>();
             result.put("success", false);
-            result.put("message", "Login failed. Check your email and password.");
+            result.put("message", "Inicio de sesion fallido. Revisa el correo o la password.");
             return result;
         }
 

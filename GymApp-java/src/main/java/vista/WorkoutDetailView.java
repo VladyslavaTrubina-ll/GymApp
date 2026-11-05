@@ -8,9 +8,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
-import java.net.URI;
 import java.util.List;
-
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import service.WorkoutSession;
 
 public class WorkoutDetailView extends JPanel {
@@ -30,18 +30,29 @@ public class WorkoutDetailView extends JPanel {
     private JLabel exerciseTitle;
     private JLabel exerciseDescription;
 
+    
     // Original constructor
     public WorkoutDetailView(Workout workout) {
-        this(workout, null);
+        this(workout, null, null, null);
     }
 
-    // Constructor with Firebase user ID for workout history
+    // Constructor que recibe el workout seleccionado y el ID del usuario logeado
     public WorkoutDetailView(Workout workout, String currentUserId) {
+        this(workout, currentUserId, null, null);
+    }
+
+    // Constructor que recibe también los streams para comunicarse con el servidor
+    public WorkoutDetailView(
+            Workout workout,
+            String currentUserId,
+            PrintWriter output,
+            BufferedReader input) {
 
         this.workout = workout;
 
         // Initialize workout session
-        if (currentUserId != null && workout.getId() != null) {
+        if (currentUserId != null && workout.getId() != null
+                && output != null && input != null) {
 
             int estimatedTime = 0;
             int totalExercises = 0;
@@ -58,20 +69,21 @@ public class WorkoutDetailView extends JPanel {
 
                     if (series != null) {
 
-                        for (Serie serie : series) {
-
-                            estimatedTime += serie.getDuracion()
-                                    + serie.getDescanso();
-                        }
+                    	for (Serie serie : series) {
+                    	    estimatedTime += serie.getRepeticiones() * serie.getDuracion();
+                    	}
                     }
                 }
             }
 
+            // Creamos la sesión y le pasamos la conexión con el servidor
             workoutSession = new WorkoutSession(
                     currentUserId,
                     workout.getId(),
                     estimatedTime,
-                    totalExercises
+                    totalExercises,
+                    output,
+                    input
             );
         }
 
@@ -113,7 +125,7 @@ public class WorkoutDetailView extends JPanel {
     }
 
     // =====================================================
-    // HEADER
+    // HEADER (nombre del workout seleccionado)
     // =====================================================
 
     private JPanel createHeader() {
@@ -131,7 +143,7 @@ public class WorkoutDetailView extends JPanel {
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setForeground(NAVY);
 
-        JLabel level = new JLabel("Nivel " + workout.getLevel());
+        JLabel level = new JLabel("Nivel " + workout.getNivel());
         level.setFont(new Font("Arial", Font.BOLD, 14));
         level.setForeground(BLUE);
 
